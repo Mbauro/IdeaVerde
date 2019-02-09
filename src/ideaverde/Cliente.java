@@ -6,8 +6,6 @@
 package ideaverde;
 
 
-import static ideaverde.IdeaVerde.contatoreNumeroTessera;
-
 import java.util.Scanner;
 
 
@@ -64,10 +62,9 @@ public class Cliente {
     }
     
     public Tessera stampaTessera(String nomeCliente, String cognomeCliente){
-               
-        contatoreNumeroTessera++;       
+                
         
-        Tessera t = new Tessera(contatoreNumeroTessera,0,nomeCliente, cognomeCliente);
+        Tessera t = new Tessera(0,nomeCliente, cognomeCliente);
         System.out.println("Tessera di: "+cognomeCliente + " "+ nomeCliente);
         
         

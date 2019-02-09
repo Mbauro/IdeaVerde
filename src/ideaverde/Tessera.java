@@ -8,13 +8,13 @@ package ideaverde;
 
 public class Tessera {
     
-    private int numeroTessera;
+    
     private int punti;
     private String nomeCliente;
     private String cognomeCliente;
 
-    public Tessera(int numeroTessera, int punti, String nomeCliente, String cognomeCliente) {
-        this.numeroTessera = numeroTessera;
+    public Tessera(int punti, String nomeCliente, String cognomeCliente) {
+        
         this.punti = punti;
         this.nomeCliente = nomeCliente;
         this.cognomeCliente = cognomeCliente;
@@ -22,7 +22,7 @@ public class Tessera {
 
     @Override
     public String toString() {
-        return "Tessera{" + "numeroTessera=" + numeroTessera + ", punti=" + punti + ", nomeCliente=" + nomeCliente + ", cognomeCliente=" + cognomeCliente + '}';
+        return "Tessera{" + ", punti=" + punti + ", nomeCliente=" + nomeCliente + ", cognomeCliente=" + cognomeCliente + '}';
     }
 
     public String getNomeCliente() {

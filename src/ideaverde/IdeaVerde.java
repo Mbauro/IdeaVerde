@@ -16,8 +16,7 @@ public class IdeaVerde {
     static List<Tessera> listaTessere = new ArrayList<Tessera>();
     static List<TipoPianta> listaTipoPiante = new ArrayList<TipoPianta>();
     
-    //Contatore per avere numero di tessera univoco
-    public static int contatoreNumeroTessera = 3;
+    
     
         //Metodi
     public static void inserisciCliente(Cliente c){
@@ -110,9 +109,9 @@ public class IdeaVerde {
         Cliente c1 = new Cliente("Mauro","Labruna","Viale Doria","mauro@live.it","333214567");
         Cliente c2 = new Cliente("Luca","Rossi","Viale Doria","luca@live.com","3332134566");
         Cliente c3 = new Cliente("Giorgio","Bianco","Viale Doria","giorgio@live.it","323456789");
-        Tessera t1 = new Tessera(1,50,"Mauro","Labruna");
-        Tessera t2 = new Tessera(2,120,"Luca","Rossi");
-        Tessera t3 = new Tessera(3,20,"Giorgio","Bianco");
+        Tessera t1 = new Tessera(50,"Mauro","Labruna");
+        Tessera t2 = new Tessera(120,"Luca","Rossi");
+        Tessera t3 = new Tessera(20,"Giorgio","Bianco");
         
         
         
