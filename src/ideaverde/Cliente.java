@@ -6,8 +6,8 @@
 package ideaverde;
 
 
-import java.util.Scanner;
-
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class Cliente {
@@ -17,6 +17,8 @@ public class Cliente {
     private String indirizzo;
     private String email;
     private String cellulare;
+    private Tessera tessera;
+    private List<Ordine> listaDiOrdini;
     
     
 
@@ -26,6 +28,7 @@ public class Cliente {
         this.indirizzo = indirizzo;
         this.email = email;
         this.cellulare = cellulare;
+        this.listaDiOrdini = new ArrayList(); 
         
     }
 
@@ -49,6 +52,11 @@ public class Cliente {
         return cellulare;
     }
 
+    public List<Ordine> getListaDiOrdini() {
+        return listaDiOrdini;
+    }
+    
+
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
@@ -64,13 +72,15 @@ public class Cliente {
     public Tessera stampaTessera(String nomeCliente, String cognomeCliente){
                 
         
-        Tessera t = new Tessera(0,nomeCliente, cognomeCliente);
+        tessera = new Tessera(0,nomeCliente, cognomeCliente);
         System.out.println("Tessera di: "+cognomeCliente + " "+ nomeCliente);
         
         
-        return t;
+        return tessera;
         
     }
+    
+    
 
     @Override
     public String toString() {

@@ -18,9 +18,17 @@ public class IdeaVerde {
     
     
     
+    
+    
         //Metodi
     public static void inserisciCliente(Cliente c){
-        listaClienti.add(c);
+        if(listaClienti.add(c)){
+            System.out.println("Cliente registrato nel sistema.");
+        }
+        else{
+            System.out.println("Non è possibile registrare l'utente.");
+        }
+        
     }
     
     public static Cliente ricercaCliente(String nomeCliente,String cognomeCliente){
@@ -37,6 +45,7 @@ public class IdeaVerde {
         return null;
     }
     
+    
     public static void modificaCliente(String nome, String cognome){
         
         Cliente c = ricercaCliente(nome,cognome);
@@ -47,7 +56,8 @@ public class IdeaVerde {
             
             int scelta = myScanner.nextInt();
             myScanner.nextLine();
-            switch(scelta){
+            
+                switch(scelta){
                     case 1:
                         System.out.println("Inserisci la nuova email...\n");
                         String nuovaEmail = myScanner.nextLine();
@@ -69,6 +79,8 @@ public class IdeaVerde {
                         c.setCellulare(nuovoCellulare);
                         break;
             }
+            
+
         }
    
         
@@ -99,110 +111,87 @@ public class IdeaVerde {
     
     public static void inserisciTipoPianta(String tipo, String descrizione, String varietà){
     
-        TipoPianta tp = new TipoPianta(tipo,descrizione,varietà);
-        listaTipoPiante.add(tp);
+        TipoPianta tipoPianta = new TipoPianta(tipo,descrizione,varietà);
+        listaTipoPiante.add(tipoPianta);
     }
-
-       
-    public static void main(String[] args) {
-        
-        Cliente c1 = new Cliente("Mauro","Labruna","Viale Doria","mauro@live.it","333214567");
-        Cliente c2 = new Cliente("Luca","Rossi","Viale Doria","luca@live.com","3332134566");
-        Cliente c3 = new Cliente("Giorgio","Bianco","Viale Doria","giorgio@live.it","323456789");
-        Tessera t1 = new Tessera(50,"Mauro","Labruna");
-        Tessera t2 = new Tessera(120,"Luca","Rossi");
-        Tessera t3 = new Tessera(20,"Giorgio","Bianco");
-        
-        
-        
-        listaClienti.add(c1);
-        listaClienti.add(c2);
-        listaClienti.add(c3);
-        
-        listaTessere.add(t1);
-        listaTessere.add(t2);
-        listaTessere.add(t3);
-        
-        Scanner myScanner = new Scanner(System.in);
-        /*RICERCA
-        Cliente c = ricercaCliente("Mauro","Labruna");
-        System.out.println(c.toString());
-        
-        Cliente cli = ricercaCliente("ioqjdoi","ewfrew");
-        */
-        
-       /* //Modifica Cliente
-        for(Cliente object: listaClienti ){
-            System.out.println(object.toString());
-        }
-        
-        modificaCliente("Mauro","Labruna");
-        */
-       
-        //Elimina Cliente
-        /*for(Cliente object: listaClienti ){
-            System.out.println(object.toString());
-        }
-        for(Tessera object: listaTessere ){
-            System.out.println(object.toString());
-        }
-        
-        eliminaCliente("Mauro","Labruna");
-        */
-        
-        /*********inserimento cliente
-        
-        
-        
-        System.out.println("Inserisci il nome del cliente: ");
-        String nomeCliente = myScanner.nextLine();
-        
-        System.out.println("Inserisci il cognome del cliente: ");
-        String cognomeCliente = myScanner.nextLine();
-        
-        System.out.println("Inserisci l'email del cliente: ");
-        String emailCliente = myScanner.nextLine();
-        
-        System.out.println("Inserisci il indirizzo del cliente: ");
-        String indirizzoCliente = myScanner.nextLine();
-        
-        System.out.println("Inserisci il cellulare del cliente: ");
-        String cellulareCliente = myScanner.nextLine();
-        
-        Cliente c = new Cliente(nomeCliente,cognomeCliente,emailCliente,indirizzoCliente,cellulareCliente);
-       
-        
-        inserisciCliente(c);
-        
-        listaTessere.add(c.stampaTessera(c.getNome(), c.getCognome()));
-        *****************************/
-        
-        //Inserisci Tipo Pianta
-        System.out.println("Inserisci il tipo della pianta");
-        String tipo = myScanner.nextLine();
-        System.out.println("Inserisci la descrizione della pianta");
-        String descrizione = myScanner.nextLine();
-        System.out.println("Inserisci la varietà della pianta");
-        String varietà = myScanner.nextLine();
-        
-        inserisciTipoPianta(tipo,descrizione,varietà);
-        
-        System.out.println("LISTA CLIENTI: ");
-        
-        for(Cliente object: listaClienti ){
-            System.out.println(object.toString());
-        }
-        
-        for(Tessera object: listaTessere ){
-            System.out.println(object.toString());
-        }
-        
-        for(TipoPianta object: listaTipoPiante ){
-            System.out.println(object.toString());
-        }
-        
-        
+    
+    public static Ordine creaNuovoOrdine(){
+        Ordine o = new Ordine();
+        return o;
         
     }
     
+    public static float calcolaTotale(Ordine o){
+        float totale = o.getTotale();
+        return totale;
+    }
+    
+    public static void confermaOrdine(Ordine o, Cliente c, Archivio a){
+         c.getListaDiOrdini().add(o);
+         o.setC(c);
+         a.getArchivioOrdini().add(o);
+         
+         
+         
+    }
+    
+    public static void aggiungiPianta(Ordine o, String tipo, String varietà, int quantità, Pianta pianta){
+        
+        o.creaRigaDiOrdine(tipo, varietà, quantità, pianta);
+         
+    }
+    
+    public void setPagamento(String tipoPagamento, Ordine o){
+        o.setPagamento(tipoPagamento);
+    }
+    
+    public void setSpedizione(String tipoSpedizione,Ordine o){
+        o.setSpedizione(tipoSpedizione);
+    }
+    
+    public static Pianta selezionaPianta(String tipo, String varietà, int età, int quantità){
+        
+        TipoPianta tipoPianta = null;
+        
+        //Seleziona il tipo di pianta dalla listaTipoPiante in base al tipo ed alla varietà
+        for(TipoPianta object: getListaTipoPiante()){
+            if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
+                tipoPianta = object;
+                Pianta pianta = tipoPianta.getPianta(età);
+                
+                
+                tipoPianta.setQuantitàPianta(età, quantità);
+                return pianta;
+            }
+            
+        }
+        if(tipoPianta == null){
+            System.err.println("Tipo Pianta non trovato");
+            
+        }
+        return null;
+    }
+    
+    
+
+    public static List<Cliente> getListaClienti() {
+        return listaClienti;
+    }
+
+    public static List<Tessera> getListaTessere() {
+        return listaTessere;
+    }
+
+    public static List<TipoPianta> getListaTipoPiante() {
+        return listaTipoPiante;
+    }
+    
+    public static Archivio getArchivio(){
+        Archivio archivio = new Archivio();
+        return archivio;
+    }
+    
+    
+
+         
 }

@@ -11,7 +11,41 @@ package ideaverde;
  */
 public class Pianta {
     
-    private short età;
-    private int quantità;
+    private int etàPianta;
+    private int quantitàDisponibile;
+
+    public Pianta(int etàPianta, int quantitàDisponibile) {
+        this.etàPianta = etàPianta;
+        this.quantitàDisponibile = quantitàDisponibile;
+    }
+
+    public int getEtàPianta() {
+        return etàPianta;
+    }
+
+    public int getQuantitàDisponibile() {
+        return quantitàDisponibile;
+    }
+
+    public void setEtàPianta(int etàPianta) {
+        this.etàPianta = etàPianta;
+    }
+
+    public void setQuantitàDisponibile(int quantitàDisponibile) {
+        this.quantitàDisponibile = quantitàDisponibile;
+    }
+
+    @Override
+    public String toString() {
+        return "Pianta{" + "et\u00e0Pianta=" + etàPianta + ", quantit\u00e0Disponibile=" + quantitàDisponibile + '}';
+    }
+    
+    
+
+   
+
+
+    
+    
     
 }
