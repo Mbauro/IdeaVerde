@@ -7,6 +7,14 @@ package ideaverde.pagamento;
 
 
 public class PagamentoCartaDiCredito extends Pagamento {
+
+    public PagamentoCartaDiCredito() {
+    }
+    
+    public Pagamento getPagamento(){
+    
+        return new PagamentoCartaDiCredito();
+    }
     
     
     

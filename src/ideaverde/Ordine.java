@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package ideaverde;
+import ideaverde.pagamento.*;
+import ideaverde.sconto.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -15,9 +17,10 @@ public class Ordine {
     
     private List<RigaDiOrdine> listaRigheDiOrdine;
     private Cliente c;
-    private Pagamento pagamento = new Pagamento();
-    private Spedizione spedizione = new Spedizione();
+    private Pagamento pagamento;
+    private Spedizione spedizione;
     private float totale = 0;
+    private List<Sconto> listaSconti;
 
     public Ordine(List<RigaDiOrdine> listaRigheDiOrdine, Pagamento pagamento, Spedizione spedizione) {
         
@@ -29,6 +32,7 @@ public class Ordine {
     public Ordine() {
         
         this.listaRigheDiOrdine = new ArrayList<RigaDiOrdine>();
+        this.listaSconti = new ArrayList();
     }
     
     
@@ -71,9 +75,6 @@ public class Ordine {
         this.listaRigheDiOrdine = listaRigheDiOrdine;
     }
 
-    public void setPagamento(String pagamento) {
-        this.pagamento.setTipoPagamento(pagamento);
-    }
 
     public void setSpedizione(String spedizione) {
         this.spedizione.setTipoSpedizione(spedizione);
@@ -87,10 +88,33 @@ public class Ordine {
       this.c = c;
    }
 
+    public Cliente getC() {
+        return c;
+    }
+    
+
     @Override
     public String toString() {
         return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + c + ", pagamento=" + pagamento.toString() + ", spedizione=" + spedizione + ", totale=" + totale + '}';
     }
+    
+    
+    /*********************************/
+    public void insertPagamento(String tipoPagamento){
+        
+        PurePagamento p = new PurePagamento();
+        this.pagamento = p.selectPagamento(tipoPagamento);
+    }
+    
+    private void insertSconto(){
+        
+        PureSconto s = new PureSconto();
+        Sconto scontoTessera = s.selectScontoTessera(this);
+        Sconto scontoPagamento = s.selectScontoPagamento(this);
+        this.listaSconti.add(scontoTessera);
+        this.listaSconti.add(scontoPagamento);        
+    }
+    
     
     
     

@@ -142,7 +142,7 @@ public class IdeaVerde {
     }
     
     public void setPagamento(String tipoPagamento, Ordine o){
-        o.setPagamento(tipoPagamento);
+        
     }
     
     public void setSpedizione(String tipoSpedizione,Ordine o){

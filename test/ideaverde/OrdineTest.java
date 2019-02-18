@@ -7,6 +7,8 @@ package ideaverde;
 
 import ideaverde.spedizione.Spedizione;
 import ideaverde.pagamento.Pagamento;
+import ideaverde.pagamento.PagamentoCartaDiCredito;
+import ideaverde.pagamento.PagamentoContante;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -52,6 +54,7 @@ public class OrdineTest {
         r = new RigaDiOrdine("Limone","varietà1",50,pianta);
         
         ordine = new Ordine();
+        ordine.setC(cliente);
 
         
     }
@@ -89,26 +92,26 @@ public class OrdineTest {
         
     }
     
-    @Test
-    public void CalcolaTotaleScontato(){
-        
-        
-        //Sconto pagamento in contante = 15% del totale
-        //ordine.creaPagamentoContante();
-        ordine.creaPagamentoContante();
-        ordine.getListaRigheDiOrdine().add(r);
-        cliente.getListaDiOrdini().add(ordine);
-        ordine.setC(cliente);
-        
-        ordine.getTotale();
-        float expResult = 425.0F;
-        float result = ordine.calcolaTotaleScontato();
-        assertEquals(expResult,result,0.0);
-        
-        //Sconto pagamento carta di credito = 0% del totale
-        ordine.creaPagamentoCartaDiCredito();
-        assertEquals(500,ordine.calcolaTotaleScontato(),0.0);
-    }
+//    @Test
+//    public void CalcolaTotaleScontato(){
+//        
+//        
+//        //Sconto pagamento in contante = 15% del totale
+//        //ordine.creaPagamentoContante();
+//        ordine.creaPagamentoContante();
+//        ordine.getListaRigheDiOrdine().add(r);
+//        cliente.getListaDiOrdini().add(ordine);
+//        ordine.setC(cliente);
+//        
+//        ordine.getTotale();
+//        float expResult = 425.0F;
+//        float result = ordine.calcolaTotaleScontato();
+//        assertEquals(expResult,result,0.0);
+//        
+//        //Sconto pagamento carta di credito = 0% del totale
+//        ordine.creaPagamentoCartaDiCredito();
+//        assertEquals(500,ordine.calcolaTotaleScontato(),0.0);
+//    }
 
     /**
      * Test of calcolaScontoTessera method, of class Ordine.
@@ -137,6 +140,16 @@ public class OrdineTest {
 //        // TODO review the generated test code and remove the default call to fail.
 //       
 //    }
+    
+    @Test
+    public void testInsertPagamento(){
+        
+        ordine.insertPagamento("Contante");
+        assertEquals(true,ordine.getPagamento() instanceof PagamentoContante);
+        
+        ordine.insertPagamento("CartaDiCredito");
+        assertEquals(true,ordine.getPagamento() instanceof PagamentoCartaDiCredito);
+    }
 
     /**
      * Test of getListaRigheDiOrdine method, of class Ordine.
@@ -169,16 +182,16 @@ public class OrdineTest {
     /**
      * Test of getSpedizione method, of class Ordine.
      */
-    @Test
-    public void testGetSpedizione() {
-        System.out.println("getSpedizione");
-        Ordine instance = new Ordine();
-        Spedizione expResult = null;
-        Spedizione result = instance.getSpedizione();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testGetSpedizione() {
+//        System.out.println("getSpedizione");
+//        Ordine instance = new Ordine();
+//        Spedizione expResult = null;
+//        Spedizione result = instance.getSpedizione();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of setListaRigheDiOrdine method, of class Ordine.
@@ -248,16 +261,16 @@ public class OrdineTest {
     /**
      * Test of getC method, of class Ordine.
      */
-    @Test
-    public void testGetC() {
-        System.out.println("getC");
-        Ordine instance = new Ordine();
-        Cliente expResult = null;
-        Cliente result = instance.getC();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testGetC() {
+//        System.out.println("getC");
+//        Ordine instance = new Ordine();
+//        Cliente expResult = null;
+//        Cliente result = instance.getC();
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of toString method, of class Ordine.
@@ -271,6 +284,12 @@ public class OrdineTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testInsertSconto(){
+        
+        ordine.insertSconto();
     }
     
 }
