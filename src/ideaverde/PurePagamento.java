@@ -18,7 +18,7 @@ public class PurePagamento {
     private Pagamento pagamento;
     
     public Pagamento selectPagamento(String tipoPagamento){
-        if(tipoPagamento.equalsIgnoreCase("Contante")){
+        if(tipoPagamento.equalsIgnoreCase("Contanti")){
             this.pagamento = new PagamentoContante();
             return this.pagamento;
         }

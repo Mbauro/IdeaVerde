@@ -127,12 +127,11 @@ public class IdeaVerde {
     }
     
     public static void confermaOrdine(Ordine o, Cliente c, Archivio a){
-         c.getListaDiOrdini().add(o);
-         o.setC(c);
-         a.getArchivioOrdini().add(o);
-         
-         
-         
+        
+        c.getListaDiOrdini().add(o);
+        o.setC(c);
+        a.getArchivioOrdini().add(o);
+
     }
     
     public static void aggiungiPianta(Ordine o, String tipo, String varietà, int quantità, Pianta pianta){
@@ -141,12 +140,13 @@ public class IdeaVerde {
          
     }
     
-    public void setPagamento(String tipoPagamento, Ordine o){
+    public static void setPagamento(String tipoPagamento, Ordine ordine){
         
+        ordine.insertPagamento(tipoPagamento);
     }
     
-    public void setSpedizione(String tipoSpedizione,Ordine o){
-        o.setSpedizione(tipoSpedizione);
+    public static void setSpedizione(String tipoSpedizione,Ordine o){
+        //o.setSpedizione(tipoSpedizione);
     }
     
     public static Pianta selezionaPianta(String tipo, String varietà, int età, int quantità){

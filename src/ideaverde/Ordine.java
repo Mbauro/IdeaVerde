@@ -6,6 +6,7 @@
 package ideaverde;
 import ideaverde.pagamento.*;
 import ideaverde.sconto.*;
+import ideaverde.consegna.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -18,15 +19,14 @@ public class Ordine {
     private List<RigaDiOrdine> listaRigheDiOrdine;
     private Cliente c;
     private Pagamento pagamento;
-    private Spedizione spedizione;
+    private Consegna consegna;
     private float totale = 0;
     private List<Sconto> listaSconti;
 
-    public Ordine(List<RigaDiOrdine> listaRigheDiOrdine, Pagamento pagamento, Spedizione spedizione) {
+    public Ordine(List<RigaDiOrdine> listaRigheDiOrdine) {
         
         this.listaRigheDiOrdine = listaRigheDiOrdine;
-        this.pagamento = pagamento;
-        this.spedizione = spedizione;
+
     }
 
     public Ordine() {
@@ -66,9 +66,6 @@ public class Ordine {
         return pagamento;
     }
 
-    public Spedizione getSpedizione() {
-        return spedizione;
-    }
 
     
     public void setListaRigheDiOrdine(List<RigaDiOrdine> listaRigheDiOrdine) {
@@ -76,8 +73,8 @@ public class Ordine {
     }
 
 
-    public void setSpedizione(String spedizione) {
-        this.spedizione.setTipoSpedizione(spedizione);
+    public void setConsegna(String spedizione) {
+        //this.spedizione.setTipoSpedizione(spedizione);
     }
 
     public void setTotale(float totale) {
@@ -95,7 +92,7 @@ public class Ordine {
 
     @Override
     public String toString() {
-        return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + c + ", pagamento=" + pagamento.toString() + ", spedizione=" + spedizione + ", totale=" + totale + '}';
+        return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + c + ", totale=" + totale + ", pagamento=" + this.pagamento.toString() + '}';
     }
     
     

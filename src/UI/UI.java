@@ -135,15 +135,19 @@ public class UI {
 
                     System.out.println("Inserisci la quantità di piante da ordinare");
                     int quantità = myScanner.nextInt();
-
+                    
+                    try{
                     Pianta p = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
                     if(p.getQuantitàDisponibile() < quantità){
                         System.err.println("Non è possibile inserire la pianta. Quantità non disponibile");
                     }
                     else{
-
+                            
                     IdeaVerde.aggiungiPianta(ordine, tipo, varietà, quantità, p);
                     System.out.println("Pianta aggiunta nell'ordine");
+                    }
+                    }catch(NullPointerException e){
+                        //Tipo Pianta non trovato
                     }
                     System.out.println("Vuoi aggiungere altre piante? s/n");
 
@@ -160,9 +164,35 @@ public class UI {
                    }
                    System.out.println("Totale Ordine: "+totale+" €");
                    
+                   System.out.println("Seleziona il tipo di pagamento\n1.Contanti\n2.Carta di credito\n");
+                   scelta = myScanner.nextInt();
+                   switch(scelta){
+                       case 1:{
+                           IdeaVerde.setPagamento("Contanti", ordine);
+                           break;
+                       }
+                       case 2:{
+                           IdeaVerde.setPagamento("CartaDiCredito", ordine);
+                           break;
+                       }
+                   }
+                   
+                   System.out.println("Seleziona la modalità di consegna\n1.Ritiro in sede\n2.Corriere espresso\n");
+                   scelta = myScanner.nextInt();
+                   switch(scelta){
+                       case 1:{
+                           IdeaVerde.setSpedizione("RitiroInSede", ordine);
+                           break;
+                       }
+                       case 2:{
+                           IdeaVerde.setSpedizione("Corriere", ordine);
+                           break;
+                       }
+                   }
+                   
                    IdeaVerde.confermaOrdine(ordine, c, archivio);
                    
-                   
+                                
                    for(Ordine object: archivio.getArchivioOrdini()){
                        System.out.println(object.toString());
                    }

@@ -3,23 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ideaverde;
+package ideaverde.consegna;
 
 /**
  *
  * @author mauro
  */
-public class Spedizione {
+public abstract class Consegna {
     
-    private String tipoSpedizione;
-
-    public void setTipoSpedizione(String tipoSpedizione) {
-        this.tipoSpedizione = tipoSpedizione;
-    }
-    
-    
-    
-    
+    protected int prezzo;
 }
-
-
