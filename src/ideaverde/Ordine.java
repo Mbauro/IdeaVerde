@@ -41,6 +41,10 @@ public class Ordine {
                 
     }
     
+    public void creaPagamento(String tipoPagamento){
+        
+    }
+    
     public float getTotale(){
         
         for(RigaDiOrdine object: this.listaRigheDiOrdine){

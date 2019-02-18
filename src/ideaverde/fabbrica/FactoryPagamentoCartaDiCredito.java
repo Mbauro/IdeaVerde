@@ -5,14 +5,17 @@
  */
 package ideaverde.fabbrica;
 import ideaverde.pagamento.*;
-import ideaverde.sconto.*;
 
 /**
  *
  * @author mauro
  */
-public abstract class Fabbrica {
+public class FactoryPagamentoCartaDiCredito extends FactoryPagamento {
     
-    public abstract Pagamento createPagamento();
-    public abstract Sconto createSconto();
+    public Pagamento getPagamento(){
+        
+        return new PagamentoCartaDiCredito();
+        
+    }
+    
 }

@@ -6,24 +6,18 @@
 package ideaverde.fabbrica;
 
 import ideaverde.pagamento.*;
-import ideaverde.sconto.*;
 
 
 /**
  *
  * @author mauro
  */
-public class FabbricaContanti extends Fabbrica {
+public class FactoryPagamentoContante extends FactoryPagamento {
     
-        public Pagamento createPagamento(){
+        public Pagamento getPagamento(){
         
-        Pagamento p = new PagamentoContante();
-        return p;
-    }
-    
-    public Sconto createSconto(){
-        Sconto s = new ScontoContante();
-        return s;
+        return new PagamentoContante();
+        
     }
     
 }

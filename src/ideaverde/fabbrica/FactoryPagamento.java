@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ideaverde.pagamento;
+package ideaverde.fabbrica;
+import ideaverde.pagamento.*;
 
-
-public abstract class Pagamento {
+/**
+ *
+ * @author mauro
+ */
+public abstract class FactoryPagamento {
     
-   
+    public abstract Pagamento getPagamento();
+    
 }

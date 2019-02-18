@@ -32,6 +32,12 @@ public class Tessera {
     public String getCognomeCliente() {
         return cognomeCliente;
     }
+
+    public void setPunti(int punti) {
+        this.punti = punti;
+    }
+    
+    
     
     
     

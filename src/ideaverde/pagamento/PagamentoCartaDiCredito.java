@@ -8,4 +8,6 @@ package ideaverde.pagamento;
 
 public class PagamentoCartaDiCredito extends Pagamento {
     
+    
+    
 }

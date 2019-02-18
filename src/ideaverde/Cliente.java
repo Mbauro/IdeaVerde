@@ -79,6 +79,12 @@ public class Cliente {
         return tessera;
         
     }
+
+    public Tessera getTessera() {
+        return tessera;
+    }
+    
+    
     
     
 
