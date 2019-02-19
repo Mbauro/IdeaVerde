@@ -33,6 +33,13 @@ public class IdeaVerde {
         
     }
     
+    public static void confermaOrdineIngrosso(OrdineIngrosso o){
+        
+        IdeaVerde.listaDiOrdiniIngrosso.add(o);
+        
+        
+    }
+    
     public static Cliente ricercaCliente(String nomeCliente,String cognomeCliente){
     
         
@@ -213,9 +220,9 @@ public class IdeaVerde {
         
     }
     
-    public static void aggiungiPiantaOrdineIngrosso(OrdineIngrosso o, String tipo, String varietà, int età, int quantità){
-        
-        o.creaRigaDiOrdine(tipo, varietà, quantità, età);
+    public static void aggiungiPiantaOrdineIngrosso(OrdineIngrosso o, String tipo, String varieta, int eta, int quantita){
+        //System.out.println(eta+""+quantita);
+        o.creaRigaDiOrdine(tipo, varieta, quantita, eta);
         
     }
     
@@ -240,6 +247,10 @@ public class IdeaVerde {
 
     public static List<Prenotazione> getListaDiPrenotazioni() {
         return listaDiPrenotazioni;
+    }
+
+    public static List<OrdineIngrosso> getListaDiOrdiniIngrosso() {
+        return listaDiOrdiniIngrosso;
     }
     
 

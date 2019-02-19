@@ -23,7 +23,7 @@ public class PureSpedizione {
             int i = 0;
             int numero_piante = 0;
             for(RigaDiOrdine object: ordine.getListaRigheDiOrdine()){
-                numero_piante += object.getQuantità();
+                numero_piante += object.getQuantita();
             }
             //System.out.println("Numero piante: "+numero_piante);
             String indirizzo = ordine.getC().getIndirizzo();

@@ -6,6 +6,7 @@
 package ideaverde;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class OrdineIngrosso extends Ordine {
@@ -16,11 +17,18 @@ public class OrdineIngrosso extends Ordine {
         
     }
     
-     public void creaRigaDiOrdine(String tipo, String varietà, int quantità, int età){
-         
-         RigaDiOrdine r = new RigaDiOrdine(tipo,varietà,quantità,età);
+     public void creaRigaDiOrdine(String tipo, String varieta, int quantita, int eta){
+         System.out.println(eta+""+quantita);
+         RigaDiOrdine r = new RigaDiOrdine(tipo,varieta,quantita,eta);
+         System.out.println(r);
          this.listaRigheDiOrdine.add(r);
      }
+
+    public List<RigaDiOrdine> getListaRigheDiOrdine() {
+        return listaRigheDiOrdine;
+    }
+    
+    
     
     
     

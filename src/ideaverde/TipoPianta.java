@@ -17,18 +17,18 @@ public class TipoPianta {
     
     private String tipo;
     private String descrizione;
-    private String varietà;
+    private String varieta;
     private List<Pianta> listaPiante = new ArrayList();
 
     public TipoPianta(String tipo, String descrizione, String varietà) {
         this.tipo = tipo;
         this.descrizione = descrizione;
-        this.varietà = varietà;
+        this.varieta = varietà;
     }
 
     @Override
     public String toString() {
-        return "TipoPianta{" + "tipo=" + tipo + ", descrizione=" + descrizione + ", variet\u00e0=" + varietà + '}';
+        return "TipoPianta{" + "tipo=" + tipo + ", descrizione=" + descrizione + ", variet\u00e0=" + varieta + '}';
     }
 
     public String getTipo() {
@@ -40,7 +40,7 @@ public class TipoPianta {
     }
 
     public String getVarietà() {
-        return varietà;
+        return varieta;
     }
 
     public List<Pianta> getListaPiante() {

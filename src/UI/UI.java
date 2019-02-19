@@ -263,20 +263,31 @@ public class UI {
                         String tipo = myScanner.nextLine();
 
                         System.out.println("Inserisci la varietà: ");
-                        String varietà = myScanner.nextLine();
+                        String varieta = myScanner.nextLine();
 
                         System.out.println("Inserisci l'età della pianta da ordinare");
-                        int età = myScanner.nextInt();
+                        int eta = myScanner.nextInt();
+                        
 
                         System.out.println("Inserisci la quantità di piante da ordinare");
-                        int quantità = myScanner.nextInt();
+                        int quantita = myScanner.nextInt();
                         //Pianta p = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
-                        IdeaVerde.aggiungiPiantaOrdineIngrosso(ordine, tipo, varietà, età, quantità);
+                        IdeaVerde.aggiungiPiantaOrdineIngrosso(ordine, tipo, varieta, eta, quantita);
+                        myScanner.nextLine();
                         System.out.println("Vuoi continuare? s/n");
                         check = myScanner.nextLine();
                         
                 }while(check.equalsIgnoreCase("s"));
+                
+                    IdeaVerde.confermaOrdineIngrosso(ordine);
                     
+                    for(OrdineIngrosso object: IdeaVerde.getListaDiOrdiniIngrosso()){
+                        
+                        for (RigaDiOrdine object2: object.getListaRigheDiOrdine()){
+                            System.out.println("Prova ordine ingrosso "+object2.getQuantita()+"Eta': "+object2.getEta());
+                        }
+                    }
+                    break;
                     
             
             }    

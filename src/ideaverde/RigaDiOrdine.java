@@ -10,27 +10,30 @@ import java.util.List;
 
 public class RigaDiOrdine {
     
-    private int quantità;
+ 
     private float subTotale;
     private String descrizione;
     private Pianta pianta;
+    private int eta;
+    private int quantita;
 
 
 
-    public RigaDiOrdine(String tipo, String varietà ,int quantità, Pianta p) {
+    public RigaDiOrdine(String tipo, String varieta ,int quantita, Pianta p) {
         
         //this.pianta.setEtàPianta(età);
-        this.quantità = quantità;
-        this.descrizione = tipo+" "+varietà;
+        this.quantita = quantita;
+        this.descrizione = tipo+" "+varieta;
         this.pianta = p;
         //p.aggiornaQuantitàDisponibile(quantità);
         
     }
 
-    public RigaDiOrdine(String tipo, String varietà, int quantità, int età) {
+    public RigaDiOrdine(String tipo, String varieta, int quantita, int eta) {
         
-        this.descrizione = "Tipo: "+tipo + "\n" + "Varietà: " + varietà;
-
+        this.descrizione = "Tipo: "+tipo + "\n" + "Varietà: " + varieta;
+        this.eta=eta;
+        this.quantita=quantita;
         
     }
     
@@ -40,13 +43,13 @@ public class RigaDiOrdine {
     public float calcolaSubTotale(){
      //Vedere le regole di dominio per il calcolo del subtotale   
         if(this.pianta.getEtàPianta() <= 2){
-            this.subTotale = 10 * this.quantità;
+            this.subTotale = 10 * this.quantita;
         }
         else if(this.pianta.getEtàPianta()>2 && this.pianta.getEtàPianta() <= 5){
-            this.subTotale = 15 * this.quantità;
+            this.subTotale = 15 * this.quantita;
         }
         else{
-            this.subTotale = 25 * this.quantità;
+            this.subTotale = 25 * this.quantita;
         }
         
         return this.subTotale;
@@ -59,15 +62,21 @@ public class RigaDiOrdine {
     
 
     public void setQuantità(int quantità) {
-        this.quantità = quantità;
+        this.quantita = quantita;
     }
 
-    public int getQuantità() {
-        return quantità;
-    }
+    
 
     public Pianta getPianta() {
         return pianta;
+    }
+
+    public int getEta() {
+        return eta;
+    }
+
+    public int getQuantita() {
+        return quantita;
     }
     
     
@@ -77,7 +86,7 @@ public class RigaDiOrdine {
 
     @Override
     public String toString() {
-        return ""+"quantit\u00e0=" + quantità + ", subTotale=" + this.subTotale + ", descrizione=" + descrizione + "\n";
+        return ""+"quantit\u00e0=" + quantita + ", subTotale=" + this.subTotale + ", descrizione=" + descrizione + "\n";
     }
 
  
