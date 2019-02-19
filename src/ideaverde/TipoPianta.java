@@ -67,8 +67,8 @@ public class TipoPianta {
         
         for(Pianta object: this.getListaPiante()){
             if(object.getEtàPianta() == età){
-                Pianta p = object;
-                return p;
+               // Pianta p = object;
+                return object;
             }
             
         }

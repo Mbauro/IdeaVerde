@@ -9,7 +9,7 @@
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/Pianta.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/RigaDiOrdine.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/test/ideaverde/IdeaVerdeTest.java</file>
-            <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/fabbrica/FactoryPagamentoContante.java</file>
+            <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/spedizione/RitiroInSede.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/sconto/ScontoContante.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/sconto/ScontoGold.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/pagamento/Pagamento.java</file>
@@ -17,16 +17,16 @@
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/pagamento/PagamentoCartaDiCredito.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/spedizione/Spedizione.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/Cliente.java</file>
+            <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/PureSconto.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/Ordine.java</file>
-            <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/Spedizione.java</file>
+            <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/spedizione/SpedizioneCorriere.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/sconto/ScontoSilver.java</file>
-            <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/fabbrica/FactoryPagamento.java</file>
-            <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/fabbrica/FactoryPagamentoCartaDiCredito.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/IdeaVerde.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/Tessera.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/Archivio.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/TipoPianta.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/sconto/Sconto.java</file>
+            <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/PureSpedizione.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/sconto/ScontoTessera.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/UI/UI.java</file>
             <file>file:/home/mauro/Università/Ingegneria%20del%20Software/Progetto/IdeaVerde/src/ideaverde/sconto/ScontoCartaDiCredito.java</file>

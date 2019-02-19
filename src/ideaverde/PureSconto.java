@@ -30,8 +30,9 @@ public class PureSconto {
     public Sconto selectScontoPagamento(Ordine o){
     
         Pagamento p = o.getPagamento();
+        
         if(p instanceof PagamentoContante){
-            
+
             return new ScontoContante();
             
         }

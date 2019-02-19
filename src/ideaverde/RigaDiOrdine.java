@@ -43,9 +43,25 @@ public class RigaDiOrdine {
         
     }
 
+    public float getSubTotale() {
+        return subTotale;
+    }
+    
+
     public void setQuantità(int quantità) {
         this.quantità = quantità;
     }
+
+    public int getQuantità() {
+        return quantità;
+    }
+
+    public Pianta getPianta() {
+        return pianta;
+    }
+    
+    
+    
     
    
 

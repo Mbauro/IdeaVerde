@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package ideaverde;
+import ideaverde.spedizione.Spedizione;
 import ideaverde.pagamento.*;
 import ideaverde.sconto.*;
-import ideaverde.consegna.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -17,22 +17,23 @@ import java.util.ArrayList;
 public class Ordine {
     
     private List<RigaDiOrdine> listaRigheDiOrdine;
-    private Cliente c;
+    private Cliente cliente;
     private Pagamento pagamento;
-    private Consegna consegna;
+    private Spedizione spedizione;
     private float totale = 0;
     private List<Sconto> listaSconti;
 
-    public Ordine(List<RigaDiOrdine> listaRigheDiOrdine) {
-        
-        this.listaRigheDiOrdine = listaRigheDiOrdine;
-
-    }
+//    public Ordine(List<RigaDiOrdine> listaRigheDiOrdine) {
+//        
+//        this.listaRigheDiOrdine = listaRigheDiOrdine;
+//
+//    }
 
     public Ordine() {
         
         this.listaRigheDiOrdine = new ArrayList<RigaDiOrdine>();
         this.listaSconti = new ArrayList();
+        
     }
     
     
@@ -41,6 +42,7 @@ public class Ordine {
         
         RigaDiOrdine r = new RigaDiOrdine(tipo,varietà,quantità,p);
         this.listaRigheDiOrdine.add(r);
+        p.setQuantitàDisponibile(p.getQuantitàDisponibile() - quantità);
         
                 
     }
@@ -52,12 +54,32 @@ public class Ordine {
     public float getTotale(){
         
         for(RigaDiOrdine object: this.listaRigheDiOrdine){
-            this.totale += object.calcolaSubTotale();
+            this.totale += object.getSubTotale();
         }
         return this.totale;
     }
     
+    public float getTotaleScontato(){
+        //Aggiunge gli sconti del cliente alla lista
+        this.insertSconto();
+       
+        float totale_scontato = 0;
+        
+        for(Sconto object: this.getListaSconti()){
+            if(object != null){
+                totale_scontato += this.totale - (object.getPercentualeSconto()*this.totale/100);
+            }
+           
+        }
+        return totale_scontato;
+    }
 
+    public List<Sconto> getListaSconti() {
+        return listaSconti;
+    }
+    
+    
+    
     public List<RigaDiOrdine> getListaRigheDiOrdine() {
         return listaRigheDiOrdine;
     }
@@ -65,6 +87,7 @@ public class Ordine {
     public Pagamento getPagamento() {
         return pagamento;
     }
+    
 
 
     
@@ -82,17 +105,19 @@ public class Ordine {
     }
 
     public void setC(Cliente c) {
-      this.c = c;
+      this.cliente = c;
    }
 
     public Cliente getC() {
-        return c;
+        return cliente;
     }
+
+
     
 
     @Override
     public String toString() {
-        return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + c + ", totale=" + totale + ", pagamento=" + this.pagamento.toString() + '}';
+        return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + cliente + ", totale=" + totale + ", pagamento=" + this.pagamento.getTipoPagamento() + ", spedizione=" + this.spedizione.toString() + '}';
     }
     
     
@@ -108,8 +133,15 @@ public class Ordine {
         PureSconto s = new PureSconto();
         Sconto scontoTessera = s.selectScontoTessera(this);
         Sconto scontoPagamento = s.selectScontoPagamento(this);
+        
+        
         this.listaSconti.add(scontoTessera);
-        this.listaSconti.add(scontoPagamento);        
+        this.listaSconti.add(scontoPagamento);      
+    }
+    
+    public void insertSpedizone(String tipoSpedizione){
+        PureSpedizione s = new PureSpedizione();
+        this.spedizione = s.selectSpedizione(tipoSpedizione, this);
     }
     
     

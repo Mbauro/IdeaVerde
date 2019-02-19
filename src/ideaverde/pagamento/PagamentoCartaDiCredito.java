@@ -9,11 +9,17 @@ package ideaverde.pagamento;
 public class PagamentoCartaDiCredito extends Pagamento {
 
     public PagamentoCartaDiCredito() {
+        super();
+        this.tipoPagamento = "Pagamento con carta di credito";
     }
     
     public Pagamento getPagamento(){
     
         return new PagamentoCartaDiCredito();
+    }
+    
+    public String getTipoPagamento(){
+        return this.tipoPagamento;
     }
     
     

@@ -9,6 +9,12 @@ package ideaverde.pagamento;
 public class PagamentoContante extends Pagamento {
 
     public PagamentoContante() {
+        
+        this.tipoPagamento = "pagamento in contanti";
+    }
+    
+        public String getTipoPagamento(){
+        return this.tipoPagamento;
     }
 
     

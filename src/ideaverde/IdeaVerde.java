@@ -115,29 +115,31 @@ public class IdeaVerde {
         listaTipoPiante.add(tipoPianta);
     }
     
-    public static Ordine creaNuovoOrdine(){
+    public static Ordine creaNuovoOrdine(Cliente c){
         Ordine o = new Ordine();
+        o.setC(c);
         return o;
         
     }
     
     public static float calcolaTotale(Ordine o){
         float totale = o.getTotale();
+        System.out.println("Totale non scontato: "+totale+" €");
+        float totale_scontato = o.getTotaleScontato();
+        System.out.println("Totale scontato: "+totale_scontato+" €");
         return totale;
     }
     
     public static void confermaOrdine(Ordine o, Cliente c, Archivio a){
         
         c.getListaDiOrdini().add(o);
-        o.setC(c);
         a.getArchivioOrdini().add(o);
 
     }
     
     public static void aggiungiPianta(Ordine o, String tipo, String varietà, int quantità, Pianta pianta){
-        
-        o.creaRigaDiOrdine(tipo, varietà, quantità, pianta);
-         
+
+            o.creaRigaDiOrdine(tipo, varietà, quantità, pianta);
     }
     
     public static void setPagamento(String tipoPagamento, Ordine ordine){
@@ -145,8 +147,8 @@ public class IdeaVerde {
         ordine.insertPagamento(tipoPagamento);
     }
     
-    public static void setSpedizione(String tipoSpedizione,Ordine o){
-        //o.setSpedizione(tipoSpedizione);
+    public static void setSpedizione(String tipoSpedizione,Ordine ordine){
+        ordine.insertSpedizone(tipoSpedizione);
     }
     
     public static Pianta selezionaPianta(String tipo, String varietà, int età, int quantità){
@@ -157,11 +159,15 @@ public class IdeaVerde {
         for(TipoPianta object: getListaTipoPiante()){
             if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
                 tipoPianta = object;
-                Pianta pianta = tipoPianta.getPianta(età);
+//                Pianta pianta = tipoPianta.getPianta(età);
+                  for(Pianta object1: tipoPianta.getListaPiante()){
+                      if(object1.getEtàPianta() == età){
+                          return object1;
+                      }
+                   }
                 
-                
-                tipoPianta.setQuantitàPianta(età, quantità);
-                return pianta;
+                //tipoPianta.setQuantitàPianta(età, quantità);
+                //return pianta;
             }
             
         }

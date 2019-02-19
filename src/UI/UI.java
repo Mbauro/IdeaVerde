@@ -21,8 +21,8 @@ public class UI {
     
     public static void main(String[] args){
         
-        TipoPianta tp1 = new TipoPianta("Limone","giallo","varietà1");
-        TipoPianta tp2 = new TipoPianta("Arancia","arancione","varietà1");
+        TipoPianta tp1 = new TipoPianta("Limone","giallo","varieta");
+        TipoPianta tp2 = new TipoPianta("Arancia","arancione","varieta");
         Pianta limone = new Pianta(2,1000);
         Pianta arancia = new Pianta(5,400);
         Pianta limone2 = new Pianta(10,550);
@@ -112,7 +112,7 @@ public class UI {
                Cliente c = IdeaVerde.ricercaCliente(nomeCliente, cognomeCliente);
                 
                if(c!= null){
-                    Ordine ordine = IdeaVerde.creaNuovoOrdine();
+                    Ordine ordine = IdeaVerde.creaNuovoOrdine(c);
                     String continuare = "s";
 
                 do{
@@ -137,33 +137,36 @@ public class UI {
                     int quantità = myScanner.nextInt();
                     
                     try{
-                    Pianta p = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
-                    if(p.getQuantitàDisponibile() < quantità){
-                        System.err.println("Non è possibile inserire la pianta. Quantità non disponibile");
-                    }
-                    else{
-                            
-                    IdeaVerde.aggiungiPianta(ordine, tipo, varietà, quantità, p);
-                    System.out.println("Pianta aggiunta nell'ordine");
-                    }
+                        Pianta p = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
+
+                        if(p.getQuantitàDisponibile() < quantità){
+                            System.err.println("Non è possibile inserire la pianta. Quantità non disponibile");
+                        }
+                        else{
+
+                        IdeaVerde.aggiungiPianta(ordine, tipo, varietà, quantità, p);
+                        System.out.println("Pianta aggiunta nell'ordine");
+                        }
+                        
                     }catch(NullPointerException e){
-                        //Tipo Pianta non trovato
+                        System.err.println("Pianta non trovata. Riprova l'inserimento");
                     }
                     System.out.println("Vuoi aggiungere altre piante? s/n");
-
 
                     myScanner.nextLine();
                     continuare = myScanner.nextLine();
 
                 }while(!continuare.equalsIgnoreCase("n"));
                
-                float totale = IdeaVerde.calcolaTotale(ordine);
+                if(ordine.getListaRigheDiOrdine().isEmpty()){
+                    break;
+                }
                    //Stampa righe di ordine
                    for(RigaDiOrdine object: ordine.getListaRigheDiOrdine()){
+                      object.calcolaSubTotale();
                       System.out.println(object.toString());
                    }
-                   System.out.println("Totale Ordine: "+totale+" €");
-                   
+                   //Stampa il totale non scontato dell'ordine
                    System.out.println("Seleziona il tipo di pagamento\n1.Contanti\n2.Carta di credito\n");
                    scelta = myScanner.nextInt();
                    switch(scelta){
@@ -176,6 +179,13 @@ public class UI {
                            break;
                        }
                    }
+                   
+                   System.out.println(ordine.getPagamento().toString());
+                   
+                   IdeaVerde.calcolaTotale(ordine);
+                 //  System.out.println("Totale Ordine non scontato: "+totale+" €");
+                   
+
                    
                    System.out.println("Seleziona la modalità di consegna\n1.Ritiro in sede\n2.Corriere espresso\n");
                    scelta = myScanner.nextInt();
