@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package ideaverde;
+import ideaverde.pagamento.*;
+import ideaverde.sconto.*;
+import ideaverde.consegna.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -15,20 +18,21 @@ public class Ordine {
     
     private List<RigaDiOrdine> listaRigheDiOrdine;
     private Cliente c;
-    private Pagamento pagamento = new Pagamento();
-    private Spedizione spedizione = new Spedizione();
+    private Pagamento pagamento;
+    private Consegna consegna;
     private float totale = 0;
+    private List<Sconto> listaSconti;
 
-    public Ordine(List<RigaDiOrdine> listaRigheDiOrdine, Pagamento pagamento, Spedizione spedizione) {
+    public Ordine(List<RigaDiOrdine> listaRigheDiOrdine) {
         
         this.listaRigheDiOrdine = listaRigheDiOrdine;
-        this.pagamento = pagamento;
-        this.spedizione = spedizione;
+
     }
 
     public Ordine() {
         
         this.listaRigheDiOrdine = new ArrayList<RigaDiOrdine>();
+        this.listaSconti = new ArrayList();
     }
     
     
@@ -39,6 +43,10 @@ public class Ordine {
         this.listaRigheDiOrdine.add(r);
         
                 
+    }
+    
+    public void creaPagamento(String tipoPagamento){
+        
     }
     
     public float getTotale(){
@@ -58,21 +66,15 @@ public class Ordine {
         return pagamento;
     }
 
-    public Spedizione getSpedizione() {
-        return spedizione;
-    }
 
     
     public void setListaRigheDiOrdine(List<RigaDiOrdine> listaRigheDiOrdine) {
         this.listaRigheDiOrdine = listaRigheDiOrdine;
     }
 
-    public void setPagamento(String pagamento) {
-        this.pagamento.setTipoPagamento(pagamento);
-    }
 
-    public void setSpedizione(String spedizione) {
-        this.spedizione.setTipoSpedizione(spedizione);
+    public void setConsegna(String spedizione) {
+        //this.spedizione.setTipoSpedizione(spedizione);
     }
 
     public void setTotale(float totale) {
@@ -83,10 +85,33 @@ public class Ordine {
       this.c = c;
    }
 
+    public Cliente getC() {
+        return c;
+    }
+    
+
     @Override
     public String toString() {
-        return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + c + ", pagamento=" + pagamento.toString() + ", spedizione=" + spedizione + ", totale=" + totale + '}';
+        return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + c + ", totale=" + totale + ", pagamento=" + this.pagamento.toString() + '}';
     }
+    
+    
+    /*********************************/
+    public void insertPagamento(String tipoPagamento){
+        
+        PurePagamento p = new PurePagamento();
+        this.pagamento = p.selectPagamento(tipoPagamento);
+    }
+    
+    private void insertSconto(){
+        
+        PureSconto s = new PureSconto();
+        Sconto scontoTessera = s.selectScontoTessera(this);
+        Sconto scontoPagamento = s.selectScontoPagamento(this);
+        this.listaSconti.add(scontoTessera);
+        this.listaSconti.add(scontoPagamento);        
+    }
+    
     
     
     

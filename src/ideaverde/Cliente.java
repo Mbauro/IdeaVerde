@@ -29,6 +29,7 @@ public class Cliente {
         this.email = email;
         this.cellulare = cellulare;
         this.listaDiOrdini = new ArrayList(); 
+        this.stampaTessera(nome,cognome);
         
     }
 
@@ -79,6 +80,12 @@ public class Cliente {
         return tessera;
         
     }
+
+    public Tessera getTessera() {
+        return tessera;
+    }
+    
+    
     
     
 
