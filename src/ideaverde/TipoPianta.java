@@ -51,8 +51,9 @@ public class TipoPianta {
         
        for(Pianta object: this.getListaPiante()){
            if(object.getEtàPianta() == età){
+               
                if(object.getQuantitàDisponibile() < quantità){
-                   System.err.println("Quantità della pianta non disponibile");
+                   System.err.println("Quantità NON DISPONIBILE");
                }
                else{
                    object.setQuantitàDisponibile(object.getQuantitàDisponibile()-quantità);

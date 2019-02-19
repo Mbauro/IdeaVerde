@@ -5,7 +5,7 @@
  */
 package ideaverde.sconto;
 
-import ideaverde.Ordine;
+import ideaverde.OrdineCliente;
 
 /**
  *

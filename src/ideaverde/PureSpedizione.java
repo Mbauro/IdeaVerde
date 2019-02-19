@@ -11,7 +11,7 @@ public class PureSpedizione {
     
     
     
-    public Spedizione selectSpedizione(String tipoSpedizione, Ordine ordine){
+    public Spedizione selectSpedizione(String tipoSpedizione, OrdineCliente ordine){
         //Il costo tot del ritiro in sede è di 0 euro
         if(tipoSpedizione.equalsIgnoreCase("RitiroInSede")){
             

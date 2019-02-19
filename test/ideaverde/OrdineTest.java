@@ -40,7 +40,7 @@ public class OrdineTest {
     Cliente cliente = null;
     Pianta pianta = null;
     RigaDiOrdine r = null;
-    Ordine ordine;
+    OrdineCliente ordine;
     Pagamento pagamento;
     
     @Before
@@ -53,7 +53,7 @@ public class OrdineTest {
         //quantità desiderata = 50;
         r = new RigaDiOrdine("Limone","varietà1",50,pianta);
         
-        ordine = new Ordine();
+        ordine = new OrdineCliente();
         ordine.setC(cliente);
 
         
@@ -73,7 +73,7 @@ public class OrdineTest {
         String varietà = "";
         int quantità = 0;
         Pianta p = null;
-        Ordine instance = new Ordine();
+        OrdineCliente instance = new OrdineCliente();
         instance.creaRigaDiOrdine(tipo, varietà, quantità, p);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -157,7 +157,7 @@ public class OrdineTest {
 //    @Test
     public void testGetListaRigheDiOrdine() {
         System.out.println("getListaRigheDiOrdine");
-        Ordine instance = new Ordine();
+        OrdineCliente instance = new OrdineCliente();
         List<RigaDiOrdine> expResult = null;
         List<RigaDiOrdine> result = instance.getListaRigheDiOrdine();
         assertEquals(expResult, result);
@@ -171,7 +171,7 @@ public class OrdineTest {
     @Test
     public void testGetPagamento() {
         System.out.println("getPagamento");
-        Ordine instance = new Ordine();
+        OrdineCliente instance = new OrdineCliente();
         Pagamento expResult = null;
         Pagamento result = instance.getPagamento();
         assertEquals(expResult, result);
@@ -200,7 +200,7 @@ public class OrdineTest {
     public void testSetListaRigheDiOrdine() {
         System.out.println("setListaRigheDiOrdine");
         List<RigaDiOrdine> listaRigheDiOrdine = null;
-        Ordine instance = new Ordine();
+        OrdineCliente instance = new OrdineCliente();
         instance.setListaRigheDiOrdine(listaRigheDiOrdine);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -226,7 +226,7 @@ public class OrdineTest {
     public void testSetSpedizione() {
         System.out.println("setSpedizione");
         String spedizione = "";
-        Ordine instance = new Ordine();
+        OrdineCliente instance = new OrdineCliente();
         instance.setSpedizione(spedizione);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -239,7 +239,7 @@ public class OrdineTest {
     public void testSetTotale() {
         System.out.println("setTotale");
         float totale = 0.0F;
-        Ordine instance = new Ordine();
+        OrdineCliente instance = new OrdineCliente();
         instance.setTotale(totale);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -252,7 +252,7 @@ public class OrdineTest {
     public void testSetC() {
         System.out.println("setC");
         Cliente c = null;
-        Ordine instance = new Ordine();
+        OrdineCliente instance = new OrdineCliente();
         instance.setC(c);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -278,7 +278,7 @@ public class OrdineTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        Ordine instance = new Ordine();
+        OrdineCliente instance = new OrdineCliente();
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);

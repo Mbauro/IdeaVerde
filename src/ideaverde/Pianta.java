@@ -35,6 +35,15 @@ public class Pianta {
         this.quantitàDisponibile = quantitàDisponibile;
     }
 
+    public void aggiornaQuantitàDisponibile(int quantità) {
+        if(this.quantitàDisponibile < quantità){
+            System.err.println("Quantità non disponibile");
+        }
+        else{
+            this.setQuantitàDisponibile(this.quantitàDisponibile - quantità);
+        }
+    }
+
     @Override
     public String toString() {
         return "Pianta{" + "et\u00e0Pianta=" + etàPianta + ", quantit\u00e0Disponibile=" + quantitàDisponibile + '}';

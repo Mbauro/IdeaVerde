@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 public class Archivio {
     
-    private List<Ordine> archivioOrdini;
+    private List<OrdineCliente> archivioOrdini;
 
     public Archivio() {
         this.archivioOrdini = new ArrayList();
     }
 
-    public List<Ordine> getArchivioOrdini() {
+    public List<OrdineCliente> getArchivioOrdini() {
         return archivioOrdini;
     }
     

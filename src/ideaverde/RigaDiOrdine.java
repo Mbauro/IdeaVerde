@@ -23,8 +23,18 @@ public class RigaDiOrdine {
         this.quantità = quantità;
         this.descrizione = tipo+" "+varietà;
         this.pianta = p;
+        //p.aggiornaQuantitàDisponibile(quantità);
         
     }
+
+    public RigaDiOrdine(String tipo, String varietà, int quantità, int età) {
+        
+        this.descrizione = "Tipo: "+tipo + "\n" + "Varietà: " + varietà;
+
+        
+    }
+    
+    
     
     
     public float calcolaSubTotale(){

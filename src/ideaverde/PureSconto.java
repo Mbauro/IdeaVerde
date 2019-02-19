@@ -12,7 +12,7 @@ public class PureSconto {
     
     
     
-    public Sconto selectScontoTessera(Ordine o){
+    public Sconto selectScontoTessera(OrdineCliente o){
         
         int punti = o.getC().getTessera().getPunti();
         if(punti >1000 && punti < 2000){
@@ -27,7 +27,7 @@ public class PureSconto {
         
     }
     
-    public Sconto selectScontoPagamento(Ordine o){
+    public Sconto selectScontoPagamento(OrdineCliente o){
     
         Pagamento p = o.getPagamento();
         

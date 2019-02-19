@@ -18,7 +18,7 @@ public class Cliente {
     private String email;
     private String cellulare;
     private Tessera tessera;
-    private List<Ordine> listaDiOrdini;
+    private List<OrdineCliente> listaDiOrdini;
     
     
 
@@ -53,7 +53,7 @@ public class Cliente {
         return cellulare;
     }
 
-    public List<Ordine> getListaDiOrdini() {
+    public List<OrdineCliente> getListaDiOrdini() {
         return listaDiOrdini;
     }
     

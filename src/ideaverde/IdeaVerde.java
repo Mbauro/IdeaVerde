@@ -15,6 +15,8 @@ public class IdeaVerde {
     static List<Cliente> listaClienti = new ArrayList<Cliente>();
     static List<Tessera> listaTessere = new ArrayList<Tessera>();
     static List<TipoPianta> listaTipoPiante = new ArrayList<TipoPianta>();
+    static List<Prenotazione> listaDiPrenotazioni = new ArrayList();
+    static List<OrdineIngrosso> listaDiOrdiniIngrosso = new ArrayList();
     
     
     
@@ -115,14 +117,14 @@ public class IdeaVerde {
         listaTipoPiante.add(tipoPianta);
     }
     
-    public static Ordine creaNuovoOrdine(Cliente c){
-        Ordine o = new Ordine();
+    public static OrdineCliente creaNuovoOrdine(Cliente c){
+        OrdineCliente o = new OrdineCliente();
         o.setC(c);
         return o;
         
     }
     
-    public static float calcolaTotale(Ordine o){
+    public static float calcolaTotale(OrdineCliente o){
         float totale = o.getTotale();
         System.out.println("Totale non scontato: "+totale+" €");
         float totale_scontato = o.getTotaleScontato();
@@ -130,24 +132,34 @@ public class IdeaVerde {
         return totale;
     }
     
-    public static void confermaOrdine(Ordine o, Cliente c, Archivio a){
+    public static void confermaOrdine(OrdineCliente o, Cliente c, Archivio a){
         
         c.getListaDiOrdini().add(o);
         a.getArchivioOrdini().add(o);
 
     }
     
-    public static void aggiungiPianta(Ordine o, String tipo, String varietà, int quantità, Pianta pianta){
+    public static void aggiungiPianta(OrdineCliente o, String tipo, String varietà, int quantità, Pianta pianta){
 
             o.creaRigaDiOrdine(tipo, varietà, quantità, pianta);
+            TipoPianta tp = null;
+            
+            for(TipoPianta object: listaTipoPiante){
+                if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
+                    tp = object;
+                }
+            }
+            if(tp != null){
+                tp.setQuantitàPianta(pianta.getEtàPianta(), quantità);
+            }
     }
     
-    public static void setPagamento(String tipoPagamento, Ordine ordine){
+    public static void setPagamento(String tipoPagamento, OrdineCliente ordine){
         
         ordine.insertPagamento(tipoPagamento);
     }
     
-    public static void setSpedizione(String tipoSpedizione,Ordine ordine){
+    public static void setSpedizione(String tipoSpedizione,OrdineCliente ordine){
         ordine.insertSpedizone(tipoSpedizione);
     }
     
@@ -162,11 +174,11 @@ public class IdeaVerde {
 //                Pianta pianta = tipoPianta.getPianta(età);
                   for(Pianta object1: tipoPianta.getListaPiante()){
                       if(object1.getEtàPianta() == età){
+                          
                           return object1;
                       }
                    }
                 
-                //tipoPianta.setQuantitàPianta(età, quantità);
                 //return pianta;
             }
             
@@ -176,6 +188,35 @@ public class IdeaVerde {
             
         }
         return null;
+    }
+    
+    /****************+PRENOTAZIONE*****************/
+    public static Prenotazione creaPrenotazione(Cliente c){
+        Prenotazione prenotazione = new Prenotazione();
+        prenotazione.setCliente(c);
+        return prenotazione;
+    }
+    
+    
+    public static void effettuaPrenotazione(String tipo, String varietà, int età, int quantità, Pianta p, Prenotazione prenotazione){
+       // Prenotazione prenotazione = new Prenotazione();
+        prenotazione.creaRigaDiOrdine(tipo, varietà, quantità, p);
+        //prenotazione.setCliente(c);
+        
+        //listaDiPrenotazioni.add(prenotazione);
+    }
+    
+    /*********ORDINE ALL'INGROSSO************/
+    public static OrdineIngrosso creaOrdineIngrosso(){
+        OrdineIngrosso ordine = new OrdineIngrosso();
+        return ordine;
+        
+    }
+    
+    public static void aggiungiPiantaOrdineIngrosso(OrdineIngrosso o, String tipo, String varietà, int età, int quantità){
+        
+        o.creaRigaDiOrdine(tipo, varietà, quantità, età);
+        
     }
     
     
@@ -196,6 +237,13 @@ public class IdeaVerde {
         Archivio archivio = new Archivio();
         return archivio;
     }
+
+    public static List<Prenotazione> getListaDiPrenotazioni() {
+        return listaDiPrenotazioni;
+    }
+    
+
+
     
     
 
