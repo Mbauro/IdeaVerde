@@ -5,6 +5,7 @@
  */
 package ideaverde;
 
+
 /**
  *
  * @author mauro
@@ -48,7 +49,6 @@ public class Pianta {
     public String toString() {
         return "Pianta{" + "et\u00e0Pianta=" + etaPianta + ", quantit\u00e0Disponibile=" + quantitàDisponibile + '}';
     }
-    
     
 
    

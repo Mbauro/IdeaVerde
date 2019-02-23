@@ -23,11 +23,7 @@ public class OrdineCliente extends Ordine {
     private float totale = 0;
     private List<Sconto> listaSconti;
 
-//    public Ordine(List<RigaDiOrdine> listaRigheDiOrdine) {
-//        
-//        this.listaRigheDiOrdine = listaRigheDiOrdine;
-//
-//    }
+
 
     public OrdineCliente() {
         

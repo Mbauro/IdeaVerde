@@ -13,7 +13,7 @@ public class Tessera {
     private String nomeCliente;
     private String cognomeCliente;
 
-    public Tessera(int punti, String nomeCliente, String cognomeCliente) {
+    public Tessera(String nomeCliente, String cognomeCliente,int punti) {
         
         this.punti = punti;
         this.nomeCliente = nomeCliente;

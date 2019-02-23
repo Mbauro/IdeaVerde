@@ -8,6 +8,7 @@ package UI;
 import ideaverde.*;
 import static java.lang.System.*;
 import java.util.Scanner;
+import ideaverde.IdeaVerde;
 
 /**
  *
@@ -47,9 +48,10 @@ public class UI {
         System.out.println("1.Inserisci Cliente\n"
                          + "2.Modifica Cliente\n"
                          + "3.Elimina Cliente\n"
-                         + "4.Crea un nuovo ordine\n"
-                         + "5.Effettua Ordine all'Ingrosso\n"
-                         + "6.Stampa Lista Clienti\n"
+                         + "4.Inserisci nuovo tipo di pianta\n"
+                         + "5.Crea un nuovo ordine\n"
+                         + "6.Effettua Ordine all'Ingrosso\n"
+                         + "7.Stampa Lista Clienti\n"
                          + "0.Esci Dal software");
         
         scelta = myScanner.nextInt();
@@ -74,11 +76,9 @@ public class UI {
                 System.out.println("Inserisci il cellulare del cliente: ");
                 String cellulareCliente = myScanner.nextLine();
 
-                Cliente c = new Cliente(nomeCliente,cognomeCliente,indirizzoCliente,emailCliente,cellulareCliente);
+                
+                IdeaVerde.inserisciCliente(nomeCliente,cognomeCliente,indirizzoCliente,emailCliente,cellulareCliente);
 
-
-                IdeaVerde.inserisciCliente(c);
-               
                 break;
             }
             case 2:{
@@ -102,8 +102,20 @@ public class UI {
                 
                 break;
             }
-                
+            
             case 4:{
+                System.out.println("Inserisci il tipo della pianta da inserire");
+                String tipo = myScanner.nextLine();
+                System.out.println("Inserisci la varietà della pianta da inserire");
+                String varieta = myScanner.nextLine();
+                System.out.println("Inserisci la descrizione della pianta da inserire");
+                String descrizione = myScanner.nextLine();
+                IdeaVerde.inserisciTipoPianta(tipo, descrizione, varieta);
+
+                break;
+            }
+                
+            case 5:{
                              
                System.out.println("Inserisci il nome del cliente che vuole effettuare l'ordine");
                String nomeCliente = myScanner.nextLine();
@@ -140,9 +152,9 @@ public class UI {
                     int quantità = myScanner.nextInt();
                     
                     try{
-                        Pianta p = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
+                        Pianta pianta = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
                         
-                        if(p.getQuantitàDisponibile() < quantità){
+                        if(pianta.getQuantitàDisponibile() < quantità){
                             System.err.println("Non è possibile inserire la pianta. Quantità non disponibile");
                             myScanner.nextLine();
                             
@@ -154,18 +166,18 @@ public class UI {
                                     prenotazione = IdeaVerde.creaPrenotazione(c);
                                 
                                 System.out.println("Prenotazione effettuata");
-                                IdeaVerde.effettuaPrenotazione(tipo,varietà,età,quantità,p,prenotazione);
+                                IdeaVerde.effettuaPrenotazione(tipo,varietà,età,quantità,pianta,prenotazione);
                                 }
                                 else{
                                     System.out.println("Prenotazione effettuata");
-                                    IdeaVerde.effettuaPrenotazione(tipo,varietà,età,quantità,p,prenotazione);
+                                    IdeaVerde.effettuaPrenotazione(tipo,varietà,età,quantità,pianta,prenotazione);
                                 }
                             }
                             
                         }
                         else{
 
-                        IdeaVerde.aggiungiPianta(ordine, tipo, varietà, quantità, p);
+                        IdeaVerde.aggiungiPianta(ordine, tipo, varietà, quantità, pianta);
                         System.out.println("Pianta aggiunta nell'ordine");
                         }
                         
@@ -243,7 +255,7 @@ public class UI {
             
             }
                 
-            case 5:{
+            case 6:{
 
                 System.out.println("Crea ordine all'ingrosso");
                 OrdineIngrosso ordine = IdeaVerde.creaOrdineIngrosso();
@@ -293,7 +305,7 @@ public class UI {
             }    
                 
                 
-            case 6:{
+            case 7:{
                 System.out.println("*********LISTA CLIENTI***********\n");
                 if(IdeaVerde.getListaClienti().isEmpty()){
                     System.out.println("Lista Vuota\n");

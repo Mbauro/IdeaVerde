@@ -22,24 +22,25 @@ public class IdeaVerde {
     
     
     
-        //Metodi
-    public static void inserisciCliente(Cliente c){
-        if(listaClienti.add(c)){
+    /****************Gestione Clienti*****************/
+    public static void inserisciCliente(String nome,String cognome,String indirizzo,String email,String cellulare){
+        Cliente cliente = new Cliente(nome,cognome,indirizzo,email,cellulare);
+        if(listaClienti.add(cliente)){
             System.out.println("Cliente registrato nel sistema.");
+            Tessera tessera = cliente.stampaTessera(nome,cognome);
+            if(tessera != null){
+                listaTessere.add(tessera);
+            }
+            else{
+                System.out.println("Non è stato possibile creare la tessera associata al cliente");
+            }
         }
         else{
             System.out.println("Non è possibile registrare l'utente.");
         }
         
     }
-    
-    public static void confermaOrdineIngrosso(OrdineIngrosso o){
         
-        IdeaVerde.listaDiOrdiniIngrosso.add(o);
-        
-        
-    }
-    
     public static Cliente ricercaCliente(String nomeCliente,String cognomeCliente){
     
         
@@ -121,8 +122,22 @@ public class IdeaVerde {
     public static void inserisciTipoPianta(String tipo, String descrizione, String varietà){
     
         TipoPianta tipoPianta = new TipoPianta(tipo,descrizione,varietà);
-        listaTipoPiante.add(tipoPianta);
+        
+        TipoPianta tmp = null;
+        
+        for(TipoPianta object: listaTipoPiante){
+            if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
+                tmp = object;
+                System.err.println("Tipo di pianta già registrato nel sistema\n");
+                break;
+            }
+        }
+        if(tmp == null){
+            listaTipoPiante.add(tipoPianta);
+            System.out.println("Tipo di pianta inserito\n");
+        }
     }
+    /******************Gestione Ordini**********************/
     
     public static OrdineCliente creaNuovoOrdine(Cliente c){
         OrdineCliente o = new OrdineCliente();
@@ -145,6 +160,7 @@ public class IdeaVerde {
         a.getArchivioOrdini().add(o);
 
     }
+    
     
     public static void aggiungiPianta(OrdineCliente o, String tipo, String varietà, int quantità, Pianta pianta){
 
@@ -226,7 +242,13 @@ public class IdeaVerde {
         
     }
     
+    public static void confermaOrdineIngrosso(OrdineIngrosso o){
+        
+        IdeaVerde.listaDiOrdiniIngrosso.add(o);
     
+    }
+    
+    /******************Liste*******************/
 
     public static List<Cliente> getListaClienti() {
         return listaClienti;

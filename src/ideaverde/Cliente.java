@@ -29,7 +29,7 @@ public class Cliente {
         this.email = email;
         this.cellulare = cellulare;
         this.listaDiOrdini = new ArrayList(); 
-        this.stampaTessera(nome,cognome);
+        
         
     }
 
@@ -72,11 +72,10 @@ public class Cliente {
     
     public Tessera stampaTessera(String nomeCliente, String cognomeCliente){
                 
-        
-        tessera = new Tessera(0,nomeCliente, cognomeCliente);
-        System.out.println("Tessera di: "+cognomeCliente + " "+ nomeCliente);
-        
-        
+        int punti = 0;
+        tessera = new Tessera(nomeCliente,cognomeCliente,punti);
+        System.out.println("Creata la Tessera di: "+nomeCliente + " "+ cognomeCliente);
+
         return tessera;
         
     }
