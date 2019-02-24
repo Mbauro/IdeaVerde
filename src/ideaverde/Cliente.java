@@ -70,10 +70,10 @@ public class Cliente {
         this.cellulare = cellulare;
     }
     
-    public Tessera stampaTessera(String nomeCliente, String cognomeCliente){
+    public Tessera stampaTessera(String nomeCliente, String cognomeCliente, String emailCliente){
                 
         int punti = 0;
-        tessera = new Tessera(nomeCliente,cognomeCliente,punti);
+        tessera = new Tessera(nomeCliente,cognomeCliente,punti,emailCliente);
         System.out.println("Creata la Tessera di: "+nomeCliente + " "+ cognomeCliente);
 
         return tessera;

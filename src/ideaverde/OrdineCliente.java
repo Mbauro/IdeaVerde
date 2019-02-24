@@ -125,7 +125,7 @@ public class OrdineCliente extends Ordine {
     }
     
     private void insertSconto(){
-        
+        // vedere modifics per eliminare la lista sconti
         PureSconto s = new PureSconto();
         Sconto scontoTessera = s.selectScontoTessera(this);
         Sconto scontoPagamento = s.selectScontoPagamento(this);

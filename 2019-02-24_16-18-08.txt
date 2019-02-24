@@ -1,0 +1,3 @@
+quantità = 232, descrizione = Tipo: limone
+Varietà: varieta
+

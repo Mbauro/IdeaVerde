@@ -89,7 +89,9 @@ public class RigaDiOrdine {
         return ""+"quantit\u00e0=" + quantita + ", subTotale=" + this.subTotale + ", descrizione=" + descrizione + "\n";
     }
 
- 
+    public String toStringIngrosso() {
+        return ""+"quantit\u00e0 = " + quantita +  ", descrizione = " + descrizione + "\n";
+    }
            
     
             

@@ -12,12 +12,14 @@ public class Tessera {
     private int punti;
     private String nomeCliente;
     private String cognomeCliente;
+    private String emailCliente;
 
-    public Tessera(String nomeCliente, String cognomeCliente,int punti) {
+    public Tessera(String nomeCliente, String cognomeCliente,int punti, String emailCliente) {
         
         this.punti = punti;
         this.nomeCliente = nomeCliente;
         this.cognomeCliente = cognomeCliente;
+        this.emailCliente= emailCliente;
     }
 
     @Override
@@ -28,6 +30,12 @@ public class Tessera {
     public String getNomeCliente() {
         return nomeCliente;
     }
+
+    public String getEmailCliente() {
+        return emailCliente;
+    }
+    
+    
 
     public String getCognomeCliente() {
         return cognomeCliente;
