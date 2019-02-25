@@ -11,10 +11,16 @@ package ideaverde.spedizione;
  */
 public class SpedizioneCorriere extends Spedizione {
     
+    int prezzo=50;
     
     private String indirizzo_di_consegna;
 
+    public int getPrezzo() {
+        return prezzo;
+    }
 
+    
+    
     public void setPrezzo(int prezzo) {
         this.prezzo = prezzo;
     }

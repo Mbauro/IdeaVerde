@@ -14,6 +14,7 @@ public abstract class Spedizione {
     protected int prezzo;
 
     public abstract void setPrezzo(int prezzo);
+    public abstract int getPrezzo();
     
     
 }

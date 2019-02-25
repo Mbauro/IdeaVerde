@@ -7,21 +7,62 @@ package ideaverde;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
-public class IdeaVerde {
 
+public class IdeaVerde implements Observer{
 
+    
 
     static List<Cliente> listaClienti = new ArrayList<Cliente>();
-    static List<Tessera> listaTessere = new ArrayList<Tessera>();
-    //static List<TipoPianta> listaTipoPiante = new ArrayList<TipoPianta>();
     static List<Prenotazione> listaDiPrenotazioni = new ArrayList();
     static List<Fornitore>listaFornitori = new ArrayList();
     
-    // Valutare inserimenti lista ordini ingrosso in archivio e anche di prenotazioni(forse)
-    static List<OrdineIngrosso> listaDiOrdiniIngrosso = new ArrayList();
+    
+    
     // CATALOGO
     static Catalogo catalogo = new Catalogo();
+
+    @Override
+    public void update(Observable pianta,Object o){
+        Pianta p=(Pianta)pianta;
+        int quantita=(int)o;
+        OrdineCliente ordine=null;
+        
+        for (Prenotazione object: listaDiPrenotazioni){
+            System.out.println("Prenotazione di : "+object.getCliente().getCognome());
+            for(RigaDiOrdine object1: object.getListaRigheDiPrenotazione()){
+                System.out.println(object1.toString());
+                if(object1.getPianta()==p){
+                    if(quantita>object1.getQuantita()){
+                        if(ordine==null){
+                            ordine=creaNuovoOrdine(object.getCliente());
+                            ordine.creaRigaDiOrdine(object1.getTipo(),object1.getVarieta(),object1.getQuantita(), p);
+                            object.getListaRigheDiPrenotazione().remove(object1);
+                        }else{
+                            ordine.creaRigaDiOrdine(object1.getTipo(),object1.getVarieta(),object1.getQuantita(), p);
+                            object.getListaRigheDiPrenotazione().remove(object1);
+                        }
+                    
+                    }
+                }   
+            }
+        }
+        
+        if(ordine!=null){
+            
+            confermaOrdine(ordine,ordine.getCliente(),IdeaVerde.getArchivio());
+        }
+        
+        for (Prenotazione object: listaDiPrenotazioni){
+            System.out.println("Prenotazione di : "+object.getCliente().getCognome());
+            for(RigaDiOrdine object1: object.getListaRigheDiPrenotazione()){
+                System.out.println(object1.toString());
+            }
+    
+        }
+    }
     
     
     
@@ -34,7 +75,7 @@ public class IdeaVerde {
             System.out.println("Cliente registrato nel sistema.");
             Tessera tessera = cliente.stampaTessera(nome,cognome,email);
             if(tessera != null){
-                listaTessere.add(tessera);
+                
             }
             else{
                 System.out.println("Non è stato possibile creare la tessera associata al cliente");
@@ -107,27 +148,8 @@ public class IdeaVerde {
             if(c != null){
                 listaClienti.remove(c);
                 System.out.println("Cliente Eliminato!");
-                
-                String nomeCliente = c.getNome();
-                String cognomeCliente = c.getCognome();
-                String emailCliente = c.getEmail();
-                
-                //Elimina la tessera corrispondente al cliente eliminato
-                
-                for(Tessera object: listaTessere){
-                    if(nomeCliente.equals(object.getNomeCliente()) && cognomeCliente.equals(object.getCognomeCliente())&& emailCliente.equals(object.getEmailCliente())){
-                        
-                       Tessera t = object;
-                       listaTessere.remove(t);
-                       System.out.println("Tessera associata al cliente eliminata");
-                       break;
-                    }
-                }
-                
-                
-                System.out.println(getListaTessere().toString());
             }
-        }
+    }
     
     public static void inserisciTipoPianta(String tipo, String descrizione, String varietà){
     
@@ -161,7 +183,10 @@ public class IdeaVerde {
         System.out.println("Totale non scontato: "+totale+" €");
         float totale_scontato = o.getTotaleScontato();
         System.out.println("Totale scontato: "+totale_scontato+" €");
-        return totale;
+        totale_scontato+=o.getSpedizione().getPrezzo();
+        System.out.println("Totale scontato compreso di spese di spedizione = "+totale_scontato);
+        o.getCliente().getTessera().setPunti((int)totale_scontato);
+        return totale_scontato;
     }
     
     public static void confermaOrdine(OrdineCliente o, Cliente c, Archivio a){
@@ -259,7 +284,7 @@ public class IdeaVerde {
     
     public static void confermaOrdineIngrosso(OrdineIngrosso o,String emailFornitore){
         
-        IdeaVerde.listaDiOrdiniIngrosso.add(o);
+        IdeaVerde.getArchivio().getListaDiOrdiniIngrosso().add(o);
         o.inviaEmailFornitore(o, emailFornitore);
         o.stampaOrdineIngrosso(o,emailFornitore);
         
@@ -267,13 +292,9 @@ public class IdeaVerde {
     }
     
     /******************Liste*******************/
-
+    
     public static List<Cliente> getListaClienti() {
         return listaClienti;
-    }
-
-    public static List<Tessera> getListaTessere() {
-        return listaTessere;
     }
 
    
@@ -284,10 +305,6 @@ public class IdeaVerde {
 
     public static List<Prenotazione> getListaDiPrenotazioni() {
         return listaDiPrenotazioni;
-    }
-
-    public static List<OrdineIngrosso> getListaDiOrdiniIngrosso() {
-        return listaDiOrdiniIngrosso;
     }
 
     public static Catalogo getCatalogo() {

@@ -12,29 +12,39 @@ public class RigaDiOrdine {
     
  
     private float subTotale;
-    private String descrizione;
+    private String tipo;
     private Pianta pianta;
     private int eta;
     private int quantita;
-
+    private String varieta;
 
 
     public RigaDiOrdine(String tipo, String varieta ,int quantita, Pianta p) {
         
         //this.pianta.setEtàPianta(età);
         this.quantita = quantita;
-        this.descrizione = tipo+" "+varieta;
+        this.tipo = tipo;
         this.pianta = p;
+        this.varieta=varieta;
         //p.aggiornaQuantitàDisponibile(quantità);
         
     }
 
     public RigaDiOrdine(String tipo, String varieta, int quantita, int eta) {
         
-        this.descrizione = "Tipo: "+tipo + "\n" + "Varietà: " + varieta;
+        this.tipo =tipo;
+        this.varieta=varieta;
         this.eta=eta;
         this.quantita=quantita;
         
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getVarieta() {
+        return varieta;
     }
     
     
@@ -86,11 +96,11 @@ public class RigaDiOrdine {
 
     @Override
     public String toString() {
-        return ""+"quantit\u00e0=" + quantita + ", subTotale=" + this.subTotale + ", descrizione=" + descrizione + "\n";
+        return ""+"quantit\u00e0 = " + quantita + ", subTotale = " + this.subTotale + ", tipo = " + tipo + ", varietà = "+varieta+"\n";
     }
 
     public String toStringIngrosso() {
-        return ""+"quantit\u00e0 = " + quantita +  ", descrizione = " + descrizione + "\n";
+        return ""+"quantit\u00e0 = " + quantita +  ", tipo = " + tipo + ", varieta = "+varieta+"\n";
     }
            
     

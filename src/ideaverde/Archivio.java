@@ -11,14 +11,21 @@ import java.util.ArrayList;
 public class Archivio {
     
     private List<OrdineCliente> archivioOrdini;
+    private List<OrdineIngrosso> listaDiOrdiniIngrosso;
 
     public Archivio() {
         this.archivioOrdini = new ArrayList();
+        this.listaDiOrdiniIngrosso = new ArrayList();
     }
 
     public List<OrdineCliente> getArchivioOrdini() {
         return archivioOrdini;
     }
+
+    public List<OrdineIngrosso> getListaDiOrdiniIngrosso() {
+        return listaDiOrdiniIngrosso;
+    }
+    
     
     
     

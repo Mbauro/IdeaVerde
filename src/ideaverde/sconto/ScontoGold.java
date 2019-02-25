@@ -18,7 +18,6 @@ public class ScontoGold extends ScontoTessera{
     
     @Override
     public int getPercentualeSconto(){
-        
         return this.percentualeSconto;
     }
     

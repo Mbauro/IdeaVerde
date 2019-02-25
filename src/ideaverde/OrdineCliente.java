@@ -137,8 +137,17 @@ public class OrdineCliente extends Ordine {
     
     
    
-    public void insertSpedizone(String tipoSpedizione){
+    public Cliente getCliente(){
        
+        return cliente;
+            
+    }
+
+    public Spedizione getSpedizione() {
+        return spedizione;
+    }
+
+    public void insertSpedizone(String tipoSpedizione) {
         //Il costo tot del ritiro in sede è di 0 euro
         if(tipoSpedizione.equalsIgnoreCase("RitiroInSede")){
             
@@ -165,7 +174,6 @@ public class OrdineCliente extends Ordine {
                 this.spedizione= spedizione;
             }
         }
-            
     }
     
     

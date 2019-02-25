@@ -11,10 +11,12 @@ package ideaverde.spedizione;
  */
 public class RitiroInSede extends Spedizione {
 
-    public RitiroInSede() {
-        super();
-        this.prezzo = 0;
+    int prezzo=0;
+
+    public int getPrezzo() {
+        return prezzo;
     }
+    
     
     
     

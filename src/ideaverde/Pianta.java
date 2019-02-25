@@ -5,19 +5,26 @@
  */
 package ideaverde;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
 
 /**
  *
  * @author mauro
  */
-public class Pianta {
+public class Pianta extends Observable {
     
+    List<Observer> osservatori = new ArrayList();
     private int etaPianta;
     private int quantitàDisponibile;
 
     public Pianta(int etàPianta, int quantitàDisponibile) {
         this.etaPianta = etàPianta;
         this.quantitàDisponibile = quantitàDisponibile;
+        
     }
 
     public int getEtàPianta() {
@@ -28,21 +35,25 @@ public class Pianta {
         return quantitàDisponibile;
     }
 
+    public void addObserver(Observer o){
+        this.osservatori.add(o);
+    }
+    
     public void setEtàPianta(int etàPianta) {
         this.etaPianta = etàPianta;
+    }
+    
+    public void removeObserver(Observer o) {
+        this.osservatori.remove(o);
     }
 
     public void setQuantitàDisponibile(int quantitàDisponibile) {
         this.quantitàDisponibile = quantitàDisponibile;
-    }
-
-    public void aggiornaQuantitàDisponibile(int quantità) {
-        if(this.quantitàDisponibile < quantità){
-            System.err.println("Quantità non disponibile");
+        for (Observer observer : this.osservatori) {
+            observer.update(this,this.quantitàDisponibile);
         }
-        else{
-            this.setQuantitàDisponibile(this.quantitàDisponibile - quantità);
-        }
+        
+        
     }
 
     @Override

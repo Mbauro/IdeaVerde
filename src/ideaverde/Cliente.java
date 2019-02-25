@@ -84,7 +84,13 @@ public class Cliente {
         return tessera;
     }
     
-    
+    public void StampaListaOrdini(){
+        
+        for(OrdineCliente object: this.listaDiOrdini){
+            System.out.println(object.toString());
+        }
+        
+    }
     
     
 

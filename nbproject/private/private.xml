@@ -3,14 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/spedizione/RitiroInSede.java</file>
             <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/OrdineCliente.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/UI/UI.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/Ordine.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/pagamento/PagamentoCartaDiCredito.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/Tessera.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/spedizione/Spedizione.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/Pianta.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/spedizione/RitiroInSede.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/Cliente.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/Archivio.java</file>
             <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/IdeaVerde.java</file>
             <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/PureSconto.java</file>
-            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/UI/UI.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/TipoPianta.java</file>
             <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/pagamento/Pagamento.java</file>
-            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/pagamento/PagamentoCartaDiCredito.java</file>
-            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/spedizione/Spedizione.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/Prenotazione.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/sconto/ScontoGold.java</file>
+            <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/RigaDiOrdine.java</file>
             <file>file:/C:/Users/coppo/Desktop/IdeaVerde/IdeaVerde/src/ideaverde/spedizione/SpedizioneCorriere.java</file>
         </group>
     </open-files>
