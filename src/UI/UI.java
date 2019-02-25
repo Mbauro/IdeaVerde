@@ -237,7 +237,7 @@ public class UI {
                     }
                 }
                    
-                System.out.println(ordine.getPagamento().toString());
+                //System.out.println(ordine.getPagamento().toString());
                    
                 IdeaVerde.calcolaTotale(ordine);
                 //  System.out.println("Totale Ordine non scontato: "+totale+" €");

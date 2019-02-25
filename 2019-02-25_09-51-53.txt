@@ -1,0 +1,3 @@
+quantità = 121, descrizione = Tipo: tomarchio
+Varietà: orazio
+

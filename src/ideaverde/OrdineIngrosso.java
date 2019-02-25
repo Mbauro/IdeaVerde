@@ -34,7 +34,7 @@ public class OrdineIngrosso extends Ordine {
       String to = emailFornitore;
 
       // Sender's email ID needs to be mentioned
-      String from = "coppolinonino@gmail.com";
+      String from = "ideaverdect@gmail.com";
 
       // Assuming you are sending email from localhost
       String host = "localhost";
@@ -65,17 +65,17 @@ public class OrdineIngrosso extends Ordine {
 
          // Set To: header field of the header.
          message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
+         String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(Calendar.getInstance().getTime());
          // Set Subject: header field
-         message.setSubject("This is the Subject Line!");
+         message.setSubject("Ordine ingrosso del "+timeStamp);
 
          // Now set the actual message
          message.setText(o.getListaRigheDiOrdine().toString());
          
          Transport.send(message);
-         System.out.println("Sent message successfully....");
+         System.out.println("Ordine inviato correttamente tramite email");
       } catch (MessagingException mex) {
-         mex.printStackTrace();
+            mex.printStackTrace();
       }
          
          

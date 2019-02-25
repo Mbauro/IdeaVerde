@@ -6,9 +6,12 @@
 package ideaverde.pagamento;
 
 
+
+
 public abstract class Pagamento {
 
     protected String tipoPagamento;
-    
+
     public abstract String getTipoPagamento();
+    
 }

@@ -262,7 +262,7 @@ public class IdeaVerde {
         IdeaVerde.listaDiOrdiniIngrosso.add(o);
         o.inviaEmailFornitore(o, emailFornitore);
         o.stampaOrdineIngrosso(o,emailFornitore);
-        System.out.println("NON INVIO UNA MINCHIA");
+        
     
     }
     
