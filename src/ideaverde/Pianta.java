@@ -50,6 +50,8 @@ public class Pianta extends Observable {
     public void setQuantitàDisponibile(int quantitàDisponibile) {
         this.quantitàDisponibile = quantitàDisponibile;
         for (Observer observer : this.osservatori) {
+            System.out.println("Non faccio un cazzo");
+            
             observer.update(this,this.quantitàDisponibile);
         }
         

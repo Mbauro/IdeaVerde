@@ -87,7 +87,7 @@ public class Cliente {
     public void StampaListaOrdini(){
         
         for(OrdineCliente object: this.listaDiOrdini){
-            System.out.println(object.toString());
+            System.out.println(object);
         }
         
     }

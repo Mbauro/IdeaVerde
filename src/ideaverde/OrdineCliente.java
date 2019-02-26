@@ -29,6 +29,7 @@ public class OrdineCliente extends Ordine {
 
     public OrdineCliente() {
         
+        System.out.println("HO CREATO ORDINE");
         this.listaRigheDiOrdine = new ArrayList<RigaDiOrdine>();
         //this.listaSconti = new ArrayList();
         
@@ -127,10 +128,10 @@ public class OrdineCliente extends Ordine {
 
     
 
-    @Override
+    /*@Override
     public String toString() {
         return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + cliente + ", totale=" + totale + ", pagamento=" + this.pagamento.getTipoPagamento() + ", spedizione=" + this.spedizione.toString() + '}';
-    }
+    }*/
     
     
     /*********************************/

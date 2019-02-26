@@ -9,6 +9,10 @@ import ideaverde.*;
 public abstract class Sconto {
     
     protected int percentualeSconto;
+    
+    public abstract int leggiPercentualeDaFile();
+    
+    public abstract void setPercentualeSconto(int newsconto);
 
   
     public abstract int getPercentualeSconto();

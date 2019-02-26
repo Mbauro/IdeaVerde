@@ -6,6 +6,8 @@
 package ideaverde;
 import ideaverde.sconto.*;
 import ideaverde.pagamento.*;
+import java.io.IOException;
+
 
 public class PureSconto {
     
@@ -16,7 +18,9 @@ public class PureSconto {
         
         int punti = o.getC().getTessera().getPunti();
         if(punti >1000 && punti < 2000){
-            return new ScontoSilver();
+            
+                return new ScontoSilver();
+            
             
         }
         else if(punti > 2000){

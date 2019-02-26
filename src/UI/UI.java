@@ -9,6 +9,8 @@ import ideaverde.*;
 import static java.lang.System.*;
 import java.util.Scanner;
 import ideaverde.IdeaVerde;
+import ideaverde.sconto.ScontoSilver;
+import java.io.Console;
 
 /**
  *
@@ -36,6 +38,9 @@ public class UI {
         IdeaVerde.getListaFornitori().add(f2);
         IdeaVerde.getListaFornitori().add(f3);
         IdeaVerde.getListaFornitori().add(f4);
+        
+        
+        
         /*for(TipoPianta object: IdeaVerde.getCatalogo().getListaTipoPiante()){
             System.out.println(object.toString());
         }*/
@@ -59,7 +64,7 @@ public class UI {
                          + "6.Effettua Ordine all'Ingrosso\n"
                          + "7.Mostra ordini relativi ad un cliente\n"
                          + "8.Aggiorna quantita disponibile di una pianta\n"
-                         + "9.Controllo prenotazioni\n"
+                         + "9.Modifica scontistica (Questa operazione può essere fatta soltanto dal gestore)\n"
                          + "10.Stampa Lista Clienti\n"
                          + "0.Esci Dal software");
         
@@ -405,6 +410,7 @@ public class UI {
 
                         System.err.println("Pianta non trovata. Riprova l'inserimento");
                     }
+                    myScanner.nextLine();
                     System.out.println("Ci sono altre piante di cui bisogna aggiornare la quantità? (s/n)");
                     continuare=myScanner.nextLine();
                 }while(continuare.equalsIgnoreCase("s"));
@@ -413,6 +419,73 @@ public class UI {
             
             case 9:{
                 
+                System.out.println("ATTENZIONE!!! Per eseguire questa operazione è necessario autenticarsi come gestore");
+                System.out.println("Inserisci username: ");
+                String username = myScanner.nextLine();
+                System.out.println("Inserisci password: ");
+                String pwd = myScanner.nextLine();
+                int check = IdeaVerde.checkPwd(username, pwd);
+                if(check==0){
+                    System.err.println("USERNAME O PASSWORD ERRATI");
+                }else{
+                    System.out.println("Autenticazione OK!!!!");
+                    System.out.println("Quale sconto vuoi modificare?\n1.Sconto Tessera\n2.Sconto Pagamento");
+                    int sceltasconto= myScanner.nextInt();
+                    switch(sceltasconto){
+                        
+                        case 1:{
+                            
+                            System.out.println("Quale sconto vuoi modificare?\n1.Sconto Silver\n2.Sconto Gold");
+                            sceltasconto=myScanner.nextInt();
+                            switch(sceltasconto){
+                                
+                                case 1:{
+                                    
+                                    System.out.println("Inserisci la nuova percentuale di sconto che vuoi attribuire a sconto Silver");
+                                    int new_sconto=myScanner.nextInt();
+                                    IdeaVerde.setScontoSilver(new_sconto);
+                                    
+                                    break;
+                                }    
+                                case 2:{
+                                    System.out.println("Inserisci la nuova percentuale di sconto che vuoi attribuire a sconto Gold");
+                                    int new_sconto=myScanner.nextInt();
+                                    IdeaVerde.setScontoGold(new_sconto);
+                                    
+                                    break;
+                                }
+                            }
+                            
+                            break;
+                        }
+                        case 2:
+                            
+                            System.out.println("Quale sconto vuoi modificare?\n1.Carta di credito\n2.Contanti");
+                            sceltasconto=myScanner.nextInt();
+                            switch(sceltasconto){
+                                case 1:{
+                                    
+                                    System.out.println("Inserisci la nuova percentuale di sconto che vuoi attribuire a sconto carta di credito");
+                                    int new_sconto=myScanner.nextInt();
+                                    IdeaVerde.setScontoCartaDiCredito(new_sconto);
+                                    
+                                    break;
+                                }
+                                case 2:{
+                                    
+                                    System.out.println("Inserisci la nuova percentuale di sconto che vuoi attribuire a sconto contanti");
+                                    int new_sconto=myScanner.nextInt();
+                                    IdeaVerde.setScontoContante(new_sconto);
+                                    
+                                    break;
+                                }
+                            }
+                            
+                            break;
+                        
+                    }
+                }
+ 
                 
                 break;
             }

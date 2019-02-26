@@ -5,6 +5,12 @@
  */
 package ideaverde;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -13,12 +19,30 @@ import java.util.Scanner;
 
 public class IdeaVerde implements Observer{
 
+    static String username="admin";
+    static String password="password";
     
-
+    
+    
+    
+    
+    
+    
     static List<Cliente> listaClienti = new ArrayList<Cliente>();
     static List<Prenotazione> listaDiPrenotazioni = new ArrayList();
     static List<Fornitore>listaFornitori = new ArrayList();
     
+    public static int checkPwd(String username,String pwd){
+        
+        if((username.equals(IdeaVerde.username))&&(pwd.equals(IdeaVerde.password))){
+            return 1;
+        }else{
+            
+            return 0;
+                
+            }
+        
+    }
     
     
     // CATALOGO
@@ -29,7 +53,10 @@ public class IdeaVerde implements Observer{
         Pianta p=(Pianta)pianta;
         int quantita=(int)o;
         OrdineCliente ordine=null;
-        
+        System.out.println("PrIMa");
+        for (Prenotazione io: listaDiPrenotazioni){
+            System.out.println(io.getListaRigheDiPrenotazione().toString());
+        }
         for (Prenotazione object: listaDiPrenotazioni){
             System.out.println("Prenotazione di : "+object.getCliente().getCognome());
             for(RigaDiOrdine object1: object.getListaRigheDiPrenotazione()){
@@ -61,6 +88,10 @@ public class IdeaVerde implements Observer{
                 System.out.println(object1.toString());
             }
     
+        }
+        System.out.println("DOPO");
+        for (Prenotazione io: listaDiPrenotazioni){
+            System.out.println(io.getListaRigheDiPrenotazione().toString());
         }
     }
     
@@ -178,6 +209,97 @@ public class IdeaVerde implements Observer{
         
     }
     
+    public static void setScontoContante(int newsconto){
+        List<String> contenutoFile = leggiFileSconti();
+        
+        
+        contenutoFile.set(3, Integer.toString(newsconto));
+        
+        stampaFileSconti(contenutoFile);
+       
+    }
+    
+    public static void setScontoCartaDiCredito(int newsconto){
+        
+        List<String> contenutoFile = leggiFileSconti();
+        contenutoFile.set(2, Integer.toString(newsconto));
+        stampaFileSconti(contenutoFile);
+
+        
+    }
+    
+    public static List<String> leggiFileSconti(){
+        
+        List<String> contenutoFile = new ArrayList();
+        try{
+            File f = new File("src//ideaverde//sconti.txt");
+            FileInputStream fs= new FileInputStream(f);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fs));
+            String linea=null;
+            while(true){
+                linea=br.readLine();
+                if(linea==null){
+                    break;
+                }else{
+                    contenutoFile.add(linea);
+                }
+            }
+            fs.close();
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        System.out.println(contenutoFile.toString());
+        return contenutoFile;
+        
+    }
+    
+    public static void stampaFileSconti(List<String> contenutoFile){
+        
+        try{
+            File f = new File("src//ideaverde//sconti.txt");
+            if(f.exists()){
+                PrintWriter myprint = new PrintWriter(f);
+                for(String object: contenutoFile){
+                    myprint.println(object);
+                }
+                myprint.close();
+            }else{
+                
+                System.out.println("ERRORE FILE SCONTI");
+                
+            }
+            
+            
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    
+        
+    }
+    
+    public static void setScontoSilver(int newsconto){
+        
+        List<String> contenutoFile = leggiFileSconti();
+        contenutoFile.set(0, Integer.toString(newsconto));
+        stampaFileSconti(contenutoFile);
+    }
+        
+    
+    
+    public static void setScontoGold(int newsconto){
+        
+        List<String> contenutoFile = leggiFileSconti();
+        contenutoFile.set(1, Integer.toString(newsconto));
+        stampaFileSconti(contenutoFile);
+        
+        
+    
+        
+    }
+    
+    
     public static float calcolaTotale(OrdineCliente o){
         float totale = o.getTotale();
         System.out.println("Totale non scontato: "+totale+" €");
@@ -257,11 +379,12 @@ public class IdeaVerde implements Observer{
     
     
     public static void effettuaPrenotazione(String tipo, String varietà,int quantità, Pianta p, Prenotazione prenotazione){
-        // Prenotazione prenotazione = new Prenotazione();
-        prenotazione.creaRigaDiOrdine(tipo, varietà, quantità, p);
-        //prenotazione.setCliente(c);
         
-        //listaDiPrenotazioni.add(prenotazione);
+        Osservatore o = new Osservatore(p);
+        
+        prenotazione.creaRigaDiOrdine(tipo, varietà, quantità, p);
+        
+        
     }
     
     public static void confermaPrenotazione(Prenotazione p){
