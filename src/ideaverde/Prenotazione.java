@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class Prenotazione {
     
     private Cliente cliente;
-    private RigaDiOrdine rigaDiOrdine;
     private List<RigaDiOrdine> listaRigheDiPrenotazione;
 
     public Prenotazione() {
@@ -41,7 +40,7 @@ public class Prenotazione {
 
     @Override
     public String toString() {
-        return "Prenotazione{" + "cliente=" + cliente + ", rigaDiOrdine=" + rigaDiOrdine + ", listaRigheDiPrenotazione=" + listaRigheDiPrenotazione + '}';
+        return "Prenotazione{" + "cliente=" + cliente + " listaRigheDiPrenotazione=" + listaRigheDiPrenotazione + '}';
     }
     
     

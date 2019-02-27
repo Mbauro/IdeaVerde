@@ -352,13 +352,13 @@ public class UI {
             case 7:{
                 System.out.println("Inserire le generalità del cliente del quale si vogliono visualizzare gli ordini");
                 
-                System.out.println("Inserisci il cognome del clinte: ");
+                System.out.println("Inserisci il cognome del cliente: ");
                 String cognome=myScanner.nextLine();
                 
-                System.out.println("Inserisci il nome del clinte: ");
+                System.out.println("Inserisci il nome del cliente: ");
                 String nome=myScanner.nextLine();
                 
-                System.out.println("Inserisci l'email del clinte: ");
+                System.out.println("Inserisci l'email del cliente: ");
                 String email=myScanner.nextLine();
                 
                 Cliente c=IdeaVerde.ricercaCliente(nome, cognome, email);

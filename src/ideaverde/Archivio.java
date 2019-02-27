@@ -67,9 +67,8 @@ public class Archivio implements Observer {
                             //Set del subtotale della riga di prenotazione
                             prenotazione.getListaRigheDiPrenotazione().get(i).calcolaSubTotale();
                             //aggiungo la riga di ordine all'ordine dato che adesso può essere consegnata la quantità
-                            ordine.creaRigaDiOrdine(prenotazione.getListaRigheDiPrenotazione().get(i).getTipo(),prenotazione.getListaRigheDiPrenotazione().get(i).getVarieta(),prenotazione.getListaRigheDiPrenotazione().get(i).getQuantita(), p);
-                            //copio semplicemente il subtotale dalla riga di prenotazione
-                            ordine.getListaRigheDiOrdine().get(i).setSubTotale(prenotazione.getListaRigheDiPrenotazione().get(i).getSubTotale());
+                            ordine.getListaRigheDiOrdine().add(prenotazione.getListaRigheDiPrenotazione().get(i));
+                           
                             //rimuovo la riga di prenotazione poichè è stata consegnata
                             prenotazione.getListaRigheDiPrenotazione().remove(i);
                             
@@ -77,10 +76,8 @@ public class Archivio implements Observer {
                             //set del subtotale della riga di prenotazione
                             prenotazione.getListaRigheDiPrenotazione().get(i).calcolaSubTotale();
                             ////aggiungo la riga di ordine all'ordine dato che adesso può essere consegnata la quantità
-                            ordine.creaRigaDiOrdine(prenotazione.getListaRigheDiPrenotazione().get(i).getTipo(),prenotazione.getListaRigheDiPrenotazione().get(i).getVarieta(),prenotazione.getListaRigheDiPrenotazione().get(i).getQuantita(), p);
-                            
-                            //Aggiorno l'attributo subtotale della riga usando il subtotale della riga di prenotazione
-                            ordine.getListaRigheDiOrdine().get(i).setSubTotale(prenotazione.getListaRigheDiPrenotazione().get(i).getSubTotale());
+                            ordine.getListaRigheDiOrdine().add(prenotazione.getListaRigheDiPrenotazione().get(i));
+                           
                             //Rimuovo dalla lista la merce partita dal vivaio
                             prenotazione.getListaRigheDiPrenotazione().remove(i);
                             

@@ -92,7 +92,7 @@ public class OrdineCliente extends Ordine {
         totale_scontato-=(totale_scontato*sp.getPercentualeSconto()/100);
         
            
-        
+        this.setTotale(totale_scontato);
         return totale_scontato;
     }
 
