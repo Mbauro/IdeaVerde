@@ -10,7 +10,7 @@ import static java.lang.System.*;
 import java.util.Scanner;
 import ideaverde.IdeaVerde;
 import ideaverde.sconto.ScontoSilver;
-import java.io.Console;
+
 
 /**
  *
@@ -65,7 +65,8 @@ public class UI {
                          + "7.Mostra ordini relativi ad un cliente\n"
                          + "8.Aggiorna quantita disponibile di una pianta\n"
                          + "9.Modifica scontistica (Questa operazione può essere fatta soltanto dal gestore)\n"
-                         + "10.Stampa Lista Clienti\n"
+                         + "10.Inserisci nuova pianta di un tipo già presente in vivaio\n"
+                         + "11.Stampa Lista Clienti\n"
                          + "0.Esci Dal software");
         
         scelta = myScanner.nextInt();
@@ -158,12 +159,7 @@ public class UI {
 
                 do{
                 //Stampa l'elenco delle tipi di pianta e delle piante ad essi associati
-                for(TipoPianta object: IdeaVerde.getCatalogo().getListaTipoPiante()){
-                    System.out.println(object.toString());
-                    for(Pianta object2: object.getListaPiante()){
-                        System.out.println(object2.toString());
-                    }
-                }
+                    IdeaVerde.stampaCatalogo();
                     
                     System.out.println("Inserisci il tipo: ");
                     String tipo = myScanner.nextLine();
@@ -182,10 +178,11 @@ public class UI {
                         
                         // La quantità richiesta dal cliente non è disponibile
                         if(pianta.getQuantitàDisponibile() < quantità){
-                            System.err.println("Non è possibile inserire la pianta. Quantità non disponibile");
                             myScanner.nextLine();
-                            
-                            System.out.println("Vuoi effettuare una prenotazione per questo articolo? s/n");
+                            System.err.println("Non è possibile inserire la pianta. Quantità non disponibile");
+                            //myScanner.nextLine();
+
+                            System.err.println("Vuoi effettuare una prenotazione per questo articolo? s/n");
                             String tmp = myScanner.nextLine();
                             
                             if(tmp.equalsIgnoreCase("s")){
@@ -299,30 +296,25 @@ public class UI {
                 
                 do{
                     //Stampa l'elenco delle tipi di pianta e delle piante ad essi associati
-                    for(TipoPianta object: IdeaVerde.getCatalogo().getListaTipoPiante()){
-                        System.out.println(object.toString());
-                        for(Pianta object2: object.getListaPiante()){
-                            System.out.println(object2.toString());
-                        }
-                    }
+                    IdeaVerde.stampaCatalogo();
 
-                        System.out.println("Inserisci il tipo: ");
-                        String tipo = myScanner.nextLine();
+                    System.out.println("Inserisci il tipo: ");
+                    String tipo = myScanner.nextLine();
 
-                        System.out.println("Inserisci la varietà: ");
-                        String varieta = myScanner.nextLine();
+                    System.out.println("Inserisci la varietà: ");
+                    String varieta = myScanner.nextLine();
 
-                        System.out.println("Inserisci l'età della pianta da ordinare");
-                        int eta = myScanner.nextInt();
-                        
+                    System.out.println("Inserisci l'età della pianta da ordinare");
+                    int eta = myScanner.nextInt();
 
-                        System.out.println("Inserisci la quantità di piante da ordinare");
-                        int quantita = myScanner.nextInt();
-                        //Pianta p = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
-                        IdeaVerde.aggiungiPiantaOrdineIngrosso(ordine, tipo, varieta, eta, quantita);
-                        myScanner.nextLine();
-                        System.out.println("Vuoi continuare? s/n");
-                        check = myScanner.nextLine();
+
+                    System.out.println("Inserisci la quantità di piante da ordinare");
+                    int quantita = myScanner.nextInt();
+                    //Pianta p = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
+                    IdeaVerde.aggiungiPiantaOrdineIngrosso(ordine, tipo, varieta, eta, quantita);
+                    myScanner.nextLine();
+                    System.out.println("Vuoi continuare? s/n");
+                    check = myScanner.nextLine();
                         
                 }while(check.equalsIgnoreCase("s"));
                 
@@ -371,7 +363,7 @@ public class UI {
                 
                 Cliente c=IdeaVerde.ricercaCliente(nome, cognome, email);
                 
-                c.StampaListaOrdini();
+                c.stampaListaOrdini();
                 
                 
                 break;
@@ -380,12 +372,7 @@ public class UI {
             case 8:{
                 String continuare = "s";
                 do{
-                    for(TipoPianta object: IdeaVerde.getCatalogo().getListaTipoPiante()){
-                            System.out.println(object.toString());
-                            for(Pianta object2: object.getListaPiante()){
-                                System.out.println(object2.toString());
-                            }
-                        }
+                    IdeaVerde.stampaCatalogo();
 
                     System.out.println("Inserisci il tipo: ");
 
@@ -490,8 +477,28 @@ public class UI {
                 break;
             }
             
-            
             case 10:{
+                IdeaVerde.stampaCatalogo();
+                System.out.println("Inserisci il tipo di pianta: ");
+                String tipo=myScanner.nextLine();
+                System.out.println("Inserisci la varietà: ");
+                String varieta = myScanner.nextLine();
+                if(IdeaVerde.checkTipoPianta(tipo, varieta)){
+                    System.out.println("Inserisci l'età della pianta: ");
+                    int eta=myScanner.nextInt();
+                    if(IdeaVerde.checkEtaPianta(eta, tipo)){
+                        System.out.println("Pianta già presente");
+                    }else{
+                        System.out.println("Inserisci la quantita': ");
+                        int quantita=myScanner.nextInt();
+                        IdeaVerde.inserisciPianta(tipo,varieta,eta,quantita);
+                    }
+                }
+                break;
+                
+            }
+            
+            case 11:{
                 System.out.println("*********LISTA CLIENTI***********\n");
                 if(IdeaVerde.getListaClienti().isEmpty()){
                     System.out.println("Lista Vuota\n");

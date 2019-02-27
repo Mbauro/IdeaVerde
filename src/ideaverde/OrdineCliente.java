@@ -24,15 +24,14 @@ public class OrdineCliente extends Ordine {
     private Spedizione spedizione;
     private float totale = 0;
     private PureSconto sconto;
+    
 
 
 
     public OrdineCliente() {
         
-        System.out.println("HO CREATO ORDINE");
         this.listaRigheDiOrdine = new ArrayList<RigaDiOrdine>();
-        //this.listaSconti = new ArrayList();
-        
+              
     }
     
     
@@ -41,7 +40,7 @@ public class OrdineCliente extends Ordine {
         
         RigaDiOrdine r = new RigaDiOrdine(tipo,varietà,quantità,p);
         this.listaRigheDiOrdine.add(r);
-        //p.setQuantitàDisponibile(p.getQuantitàDisponibile() - quantità);
+        
         
                 
     }
@@ -55,6 +54,10 @@ public class OrdineCliente extends Ordine {
         for(RigaDiOrdine object: this.listaRigheDiOrdine){
             this.totale += object.getSubTotale();
         }
+        return this.totale;
+    }
+    
+    public float prendiTotale(){
         return this.totale;
     }
     
@@ -128,10 +131,10 @@ public class OrdineCliente extends Ordine {
 
     
 
-    /*@Override
+    @Override
     public String toString() {
-        return "Ordine{" + "listaRigheDiOrdine=" + listaRigheDiOrdine + ", c=" + cliente + ", totale=" + totale + ", pagamento=" + this.pagamento.getTipoPagamento() + ", spedizione=" + this.spedizione.toString() + '}';
-    }*/
+        return "[Ordine]" + " listaRigheDiOrdine = " + listaRigheDiOrdine + ", cliente = " + cliente + ", totale = " + totale + ", pagamento = " + this.pagamento.getTipoPagamento() + ", spedizione = " + this.spedizione.toString();
+    }
     
     
     /*********************************/

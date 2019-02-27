@@ -21,6 +21,7 @@ public class Cliente {
     private List<OrdineCliente> listaDiOrdini;
     
     
+    
 
     public Cliente(String nome, String cognome, String indirizzo, String email, String cellulare) {
         this.nome = nome;
@@ -84,11 +85,13 @@ public class Cliente {
         return tessera;
     }
     
-    public void StampaListaOrdini(){
+    public void stampaListaOrdini(){
         
         for(OrdineCliente object: this.listaDiOrdini){
             System.out.println(object);
+                     
         }
+        
         
     }
     
@@ -96,7 +99,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "nome=" + nome + ", cognome=" + cognome + ", indirizzo=" + indirizzo + ", email=" + email + ", cellulare=" + cellulare + '}';
+        return "[Cliente]" + " Nome=" + nome + ", cognome = " + cognome + ", indirizzo = " + indirizzo + ", email = " + email + ", cellulare = " + cellulare;
     }
     
     

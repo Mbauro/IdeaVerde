@@ -35,32 +35,21 @@ public class Pianta extends Observable {
         return quantitàDisponibile;
     }
 
-    public void addObserver(Observer o){
-        this.osservatori.add(o);
-    }
-    
+     
     public void setEtàPianta(int etàPianta) {
         this.etaPianta = etàPianta;
     }
     
-    public void removeObserver(Observer o) {
-        this.osservatori.remove(o);
-    }
 
-    public void setQuantitàDisponibile(int quantitàDisponibile) {
-        this.quantitàDisponibile = quantitàDisponibile;
-        for (Observer observer : this.osservatori) {
-            
-            
-            observer.update(this,this.quantitàDisponibile);
-        }
-        
-        
+    public void setQuantitàDisponibile(int quantitaDisponibile) {
+        this.quantitàDisponibile = quantitaDisponibile;
+        setChanged();
+        notifyObservers(quantitaDisponibile);
     }
 
     @Override
     public String toString() {
-        return "Pianta{" + "et\u00e0Pianta=" + etaPianta + ", quantit\u00e0Disponibile=" + quantitàDisponibile + '}';
+        return "[Pianta]" + " Et\u00e0Pianta = " + etaPianta + ", quantit\u00e0 disponibile in vivaio = " + quantitàDisponibile;
     }
     
 

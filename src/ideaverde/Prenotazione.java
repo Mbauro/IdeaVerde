@@ -22,6 +22,7 @@ public class Prenotazione {
     public void creaRigaDiOrdine(String tipo, String varietà, int quantità, Pianta p){
         
        RigaDiOrdine rigaDiPrenotazione = new RigaDiOrdine(tipo,varietà,quantità,p);
+       rigaDiPrenotazione.calcolaSubTotale();
        this.listaRigheDiPrenotazione.add(rigaDiPrenotazione);
     }
 

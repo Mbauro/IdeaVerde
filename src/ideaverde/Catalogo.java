@@ -24,5 +24,22 @@ public class Catalogo {
         return listaTipoPiante;
     }
     
+    public void inserisciPianta(String tipo,String varieta,int eta,int quantita){
+        TipoPianta tp=null;
+        for(TipoPianta object: this.getListaTipoPiante()){
+            if(object.getTipo().equalsIgnoreCase(tipo)&&object.getVarietà().equalsIgnoreCase(varieta)){
+                tp=object;
+            }
+        }
+        tp.inserisciPianta(eta, quantita);
+    }
     
+    public void stampaCatalogo(){
+        for(TipoPianta object: this.getListaTipoPiante()){
+            System.out.println(object.toString());
+            for(Pianta object2: object.getListaPiante()){
+                System.out.println(object2.toString());
+            }
+        }
+    }
 }

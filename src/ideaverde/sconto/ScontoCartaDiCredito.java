@@ -37,7 +37,7 @@ public class ScontoCartaDiCredito extends ScontoPagamento {
             //LA TERZA RIGA DEL FILE CORRISPONDE ALLA PERCENTUALE DI SCONTO CARTA DI CREDITO
             String line="";
             line = Files.readAllLines(Paths.get("src\\ideaverde\\sconti.txt")).get(2);
-            System.out.println(line);
+            
              percentuale = Integer.parseInt(line);
             
         }catch(IOException e){

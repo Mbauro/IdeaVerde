@@ -28,7 +28,12 @@ public class TipoPianta {
 
     @Override
     public String toString() {
-        return "TipoPianta{" + "tipo=" + tipo + ", descrizione=" + descrizione + ", variet\u00e0=" + varieta + '}';
+        return "TipoPianta = "  + tipo + ", descrizione = " + descrizione + ", variet\u00e0 = " + varieta;
+    }
+    
+    public void inserisciPianta(int eta,int quantita){
+        Pianta p=new Pianta(eta,quantita);
+        this.getListaPiante().add(p);
     }
 
     public String getTipo() {

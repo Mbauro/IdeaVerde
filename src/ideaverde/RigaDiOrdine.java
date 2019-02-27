@@ -69,6 +69,11 @@ public class RigaDiOrdine {
     public float getSubTotale() {
         return subTotale;
     }
+
+    public void setSubTotale(float subTotale) {
+        this.subTotale = subTotale;
+    }
+    
     
 
     public void setQuantità(int quantità) {
@@ -96,7 +101,7 @@ public class RigaDiOrdine {
 
     @Override
     public String toString() {
-        return ""+"quantit\u00e0 = " + quantita + ", subTotale = " + this.subTotale + ", tipo = " + tipo + ", varietà = "+varieta+"\n";
+        return "[Riga di ordine]"+" quantit\u00e0 = " + quantita + ", subTotale = " + this.subTotale + ", tipo = " + tipo + ", varietà = "+varieta+"\n";
     }
 
     public String toStringIngrosso() {
