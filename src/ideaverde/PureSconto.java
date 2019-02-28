@@ -10,21 +10,24 @@ import java.io.IOException;
 
 
 public class PureSconto {
-    
+    //SCONTO
+    private Sconto sconto;
     
     
     
     public Sconto selectScontoTessera(OrdineCliente o){
         
-        int punti = o.getC().getTessera().getPunti();
+        int punti = o.getCliente().getTessera().getPunti();
         if(punti >1000 && punti < 2000){
-            
-                return new ScontoSilver();
+                this.sconto=new ScontoSilver();
+                return this.sconto;
             
             
         }
         else if(punti > 2000){
-            return new ScontoGold();
+            this.sconto=new ScontoGold();
+            return this.sconto;
+
 
         }
         return null;
@@ -36,12 +39,15 @@ public class PureSconto {
         Pagamento p = o.getPagamento();
         
         if(p instanceof PagamentoContante){
-
-            return new ScontoContante();
+            this.sconto=new ScontoContante();
+                return this.sconto;
+            
             
         }
         else if(p instanceof PagamentoCartaDiCredito){
-            return new ScontoCartaDiCredito();
+            this.sconto=new ScontoCartaDiCredito();
+            return this.sconto;
+            
         }
         
         return null; 

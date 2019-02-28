@@ -18,6 +18,8 @@ public class TipoPianta {
     private String tipo;
     private String descrizione;
     private String varieta;
+    
+    //LISTA DELLE PIANTE CORRISPONDENTI A QUESTO TIPO
     private List<Pianta> listaPiante = new ArrayList();
 
     public TipoPianta(String tipo, String descrizione, String varietà) {
@@ -68,22 +70,5 @@ public class TipoPianta {
                
         }
     }
-    
-    public Pianta getPianta(int età){
-        
-        for(Pianta object: this.getListaPiante()){
-            if(object.getEtàPianta() == età){
-               // Pianta p = object;
-                return object;
-            }
-            
-        }
-        return null;
-    }
-    
-    
-    
-    
-    
     
 }

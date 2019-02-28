@@ -17,7 +17,9 @@ public class Cliente {
     private String indirizzo;
     private String email;
     private String cellulare;
+    //TESSSERA
     private Tessera tessera;
+    //LISTA DEGLI ORDINI DEL CLIENTE
     private List<OrdineCliente> listaDiOrdini;
     
     
@@ -81,6 +83,7 @@ public class Cliente {
         
     }
 
+    
     public Tessera getTessera() {
         return tessera;
     }
@@ -101,7 +104,5 @@ public class Cliente {
     public String toString() {
         return "[Cliente]" + " Nome=" + nome + ", cognome = " + cognome + ", indirizzo = " + indirizzo + ", email = " + email + ", cellulare = " + cellulare;
     }
-    
-    
     
 }

@@ -15,6 +15,10 @@ public class Ordine {
     
     protected List<RigaDiOrdine> listaRigheDiOrdine;
     protected String data;
+
+    public List<RigaDiOrdine> getListaRigheDiOrdine() {
+        return listaRigheDiOrdine;
+    }
     
    
     

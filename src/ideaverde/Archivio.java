@@ -11,31 +11,38 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Archivio implements Observer {
-
-    static List<Prenotazione> listaDiPrenotazioni = new ArrayList();
     
-    private List<OrdineCliente> archivioOrdini;
-    private List<OrdineIngrosso> listaDiOrdiniIngrosso;
-
+    //LISTA DELLE PRENOTAZIONI
+    private List<Prenotazione> listaDiPrenotazioni = new ArrayList();
+    //LISTA DEGLI ORDINI
+    private List<Ordine> listaOrdini;
+    
     public Archivio() {
-        this.archivioOrdini = new ArrayList();
-        this.listaDiOrdiniIngrosso = new ArrayList();
-        
+        //this.archivioOrdini = new ArrayList();
+        //this.listaDiOrdiniIngrosso = new ArrayList();
+        this.listaOrdini=new ArrayList();
     }
 
-    public List<OrdineCliente> getArchivioOrdini() {
+    /*public List<OrdineCliente> getArchivioOrdini() {
         return archivioOrdini;
-    }
+    }*/
 
-    public List<OrdineIngrosso> getListaDiOrdiniIngrosso() {
+    /*public List<OrdineIngrosso> getListaDiOrdiniIngrosso() {
         return listaDiOrdiniIngrosso;
+    }*/
+
+    public List<Ordine> getListaOrdini() {
+        return listaOrdini;
     }
 
-   
-   
+    public List<Prenotazione> getListaDiPrenotazioni() {
+        return listaDiPrenotazioni;
+    }
     
     
     
+
+    // Metodo UPDATE che verrà chiamato da notifyObservers che è presente in pianta.
     public void update(Observable pianta,Object o){
         
         Pianta p=(Pianta)pianta;
@@ -45,12 +52,12 @@ public class Archivio implements Observer {
         
         System.out.println("PrIMa");
         
-        for (Prenotazione io: Archivio.listaDiPrenotazioni){
+        for (Prenotazione io: this.listaDiPrenotazioni){
             System.out.println(io.getListaRigheDiPrenotazione().toString());
         }
         
         
-        for (Prenotazione prenotazione: Archivio.listaDiPrenotazioni){
+        for (Prenotazione prenotazione: this.listaDiPrenotazioni){
             
             System.out.println("Prenotazione di : "+prenotazione.getCliente().getCognome());
             
@@ -59,7 +66,7 @@ public class Archivio implements Observer {
                 
                 if(prenotazione.getListaRigheDiPrenotazione().get(i).getPianta()==p){
                     
-                    if(quantita>prenotazione.getListaRigheDiPrenotazione().get(i).getQuantita()){
+                    if(p.getQuantitàDisponibile()>prenotazione.getListaRigheDiPrenotazione().get(i).getQuantita()){
                         
                         if(ordine==null){
                             
@@ -99,7 +106,7 @@ public class Archivio implements Observer {
             IdeaVerde.confermaOrdine(ordine,ordine.getCliente(),IdeaVerde.getArchivio());
         }
         
-        for (Prenotazione object: Archivio.listaDiPrenotazioni){
+        for (Prenotazione object: this.listaDiPrenotazioni){
             System.out.println("Prenotazione di : "+object.getCliente().getCognome());
             for(RigaDiOrdine object1: object.getListaRigheDiPrenotazione()){
                 System.out.println(object1.toString());
@@ -107,11 +114,10 @@ public class Archivio implements Observer {
     
         }
         System.out.println("DOPO");
-        for (Prenotazione io: Archivio.listaDiPrenotazioni){
-            System.out.println(io.getListaRigheDiPrenotazione().toString());
+        for (Prenotazione prenotazione: this.listaDiPrenotazioni){
+            System.out.println(prenotazione.getListaRigheDiPrenotazione().toString());
         }
+        p.deleteObserver(this);
     }
     
-    
-    
-}
+    }

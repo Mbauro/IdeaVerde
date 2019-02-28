@@ -23,16 +23,19 @@ public class IdeaVerde{
     static String password="password";
     
     
-        // CATALOGO
+    // CATALOGO
     static Catalogo catalogo = new Catalogo();
+    
+    //Archivio
     static Archivio archivio = new Archivio();
     
-    
-    
-    
+    //Lista di clienti     
     static List<Cliente> listaClienti = new ArrayList<Cliente>();
+    
+    //Lista di fornitori
     static List<Fornitore>listaFornitori = new ArrayList();
     
+    //Metodo per controllare l'autenticazione del gestore    
     public static int checkPwd(String username,String pwd){
         
         if((username.equals(IdeaVerde.username))&&(pwd.equals(IdeaVerde.password))){
@@ -68,6 +71,8 @@ public class IdeaVerde{
         
     }
         
+    
+    
     public static Cliente ricercaCliente(String nomeCliente,String cognomeCliente, String email){
     
         
@@ -122,6 +127,7 @@ public class IdeaVerde{
    
         
     }
+    
     public static void eliminaCliente(String nome, String cognome, String email){
             
             Cliente c = ricercaCliente(nome,cognome,email);
@@ -150,6 +156,9 @@ public class IdeaVerde{
             System.out.println("Tipo di pianta inserito\n");
         }
     }
+    
+    
+    
     /******************Gestione Ordini**********************/
     
     public static OrdineCliente creaNuovoOrdine(Cliente c){
@@ -158,6 +167,129 @@ public class IdeaVerde{
         return o;
         
     }
+    
+    
+    public static Pianta selezionaPianta(String tipo, String varietà, int età, int quantità){
+        
+        TipoPianta tipoPianta = null;
+        
+        //Seleziona il tipo di pianta dalla listaTipoPiante in base al tipo ed alla varietà
+        for(TipoPianta object: catalogo.getListaTipoPiante()){
+            if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
+                tipoPianta = object;
+//                Pianta pianta = tipoPianta.getPianta(età);
+                  for(Pianta object1: tipoPianta.getListaPiante()){
+                      if(object1.getEtàPianta() == età){
+                          
+                          return object1;
+                      }
+                   }
+                
+                //return pianta;
+            }
+            
+        }
+        if(tipoPianta == null){
+            System.err.println("Tipo Pianta non trovato");
+            
+        }
+        return null;
+    }
+    
+    
+    public static void aggiungiPianta(OrdineCliente o, String tipo, String varietà, int quantità, Pianta pianta){
+
+            o.creaRigaDiOrdine(tipo, varietà, quantità, pianta);
+            TipoPianta tp = null;
+            
+            for(TipoPianta object: catalogo.getListaTipoPiante()){
+                if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
+                    tp = object;
+                }
+            }
+            if(tp != null){
+                tp.setQuantitàPianta(pianta.getEtàPianta(), quantità);
+            }
+    }
+    
+    
+    public static void setSpedizione(String tipoSpedizione,OrdineCliente ordine){
+        ordine.insertSpedizone(tipoSpedizione);
+    }
+    
+    public static void setPagamento(String tipoPagamento, OrdineCliente ordine){
+        
+        ordine.insertPagamento(tipoPagamento);
+    }
+    
+    public static float calcolaTotale(OrdineCliente o){
+        float totale = o.getTotale();
+        System.out.println("Totale non scontato: "+totale+" €");
+        float totale_scontato = o.getTotaleScontato();
+        System.out.println("Totale scontato: "+totale_scontato+" €");
+        totale_scontato+=o.getSpedizione().getPrezzo();
+        System.out.println("Totale scontato compreso di spese di spedizione = "+totale_scontato);
+        o.getCliente().getTessera().setPunti((int)totale_scontato);
+        o.setTotale(totale_scontato);
+        return totale_scontato;
+    }
+     
+    public static void confermaOrdine(OrdineCliente o, Cliente c, Archivio a){
+        
+        c.getListaDiOrdini().add(o);
+        a.getListaOrdini().add(o);
+
+    }
+     
+    /**************** GESTIONE PRENOTAZIONE*****************/
+    public static Prenotazione creaPrenotazione(Cliente c){
+        Prenotazione prenotazione = new Prenotazione();
+        prenotazione.setCliente(c);
+        return prenotazione;
+    }
+    
+    public static void effettuaPrenotazione(String tipo, String varietà,int quantità, Pianta p, Prenotazione prenotazione){
+        
+        p.addObserver(archivio);
+        //Osservatore o = new Osservatore(p);
+        
+        //p.addObserver(o);
+        
+        prenotazione.creaRigaDiOrdine(tipo, varietà, quantità, p);
+        
+        
+    }
+    
+    public static void confermaPrenotazione(Prenotazione p){
+        
+        archivio.getListaDiPrenotazioni().add(p);
+    }
+    
+    /*********ORDINE ALL'INGROSSO************/
+    public static OrdineIngrosso creaOrdineIngrosso(){
+        OrdineIngrosso ordine = new OrdineIngrosso();
+        return ordine;
+        
+    }
+    
+    public static void aggiungiPiantaOrdineIngrosso(OrdineIngrosso o, String tipo, String varieta, int eta, int quantita){
+        
+        o.creaRigaDiOrdine(tipo, varieta, quantita, eta);
+        
+    }
+    
+    public static void confermaOrdineIngrosso(OrdineIngrosso o,String emailFornitore){
+        
+        IdeaVerde.getArchivio().getListaOrdini().add(o);
+        o.setEmailFornitore(emailFornitore);
+        o.inviaEmailFornitore(emailFornitore);
+        o.stampaOrdineIngrosso(emailFornitore);
+        
+    
+    }
+    
+    
+    
     
     public static void setScontoContante(int newsconto){
         List<String> contenutoFile = leggiFileSconti();
@@ -178,7 +310,29 @@ public class IdeaVerde{
         
     }
     
-    public static List<String> leggiFileSconti(){
+    
+    
+    public static void setScontoSilver(int newsconto){
+        
+        List<String> contenutoFile = leggiFileSconti();
+        contenutoFile.set(0, Integer.toString(newsconto));
+        stampaFileSconti(contenutoFile);
+    }
+        
+    
+    
+    public static void setScontoGold(int newsconto){
+        
+        List<String> contenutoFile = leggiFileSconti();
+        contenutoFile.set(1, Integer.toString(newsconto));
+        stampaFileSconti(contenutoFile);
+        
+        
+    
+        
+    }
+    
+    private static List<String> leggiFileSconti(){
         
         List<String> contenutoFile = new ArrayList();
         try{
@@ -204,7 +358,7 @@ public class IdeaVerde{
         
     }
     
-    public static void stampaFileSconti(List<String> contenutoFile){
+    private static void stampaFileSconti(List<String> contenutoFile){
         
         try{
             File f = new File("src//ideaverde//sconti.txt");
@@ -225,26 +379,6 @@ public class IdeaVerde{
         }catch(IOException e){
             e.printStackTrace();
         }
-    
-        
-    }
-    
-    public static void setScontoSilver(int newsconto){
-        
-        List<String> contenutoFile = leggiFileSconti();
-        contenutoFile.set(0, Integer.toString(newsconto));
-        stampaFileSconti(contenutoFile);
-    }
-        
-    
-    
-    public static void setScontoGold(int newsconto){
-        
-        List<String> contenutoFile = leggiFileSconti();
-        contenutoFile.set(1, Integer.toString(newsconto));
-        stampaFileSconti(contenutoFile);
-        
-        
     
         
     }
@@ -283,138 +417,19 @@ public class IdeaVerde{
         catalogo.inserisciPianta(tipo, varieta, eta, quantita);
     }
     
-    public static float calcolaTotale(OrdineCliente o){
-        float totale = o.getTotale();
-        System.out.println("Totale non scontato: "+totale+" €");
-        float totale_scontato = o.getTotaleScontato();
-        System.out.println("Totale scontato: "+totale_scontato+" €");
-        totale_scontato+=o.getSpedizione().getPrezzo();
-        System.out.println("Totale scontato compreso di spese di spedizione = "+totale_scontato);
-        o.getCliente().getTessera().setPunti((int)totale_scontato);
-        o.setTotale(totale_scontato);
-        return totale_scontato;
-    }
-    
-    public static void confermaOrdine(OrdineCliente o, Cliente c, Archivio a){
-        
-        c.getListaDiOrdini().add(o);
-        a.getArchivioOrdini().add(o);
-
-    }
-    
-    
-    public static void aggiungiPianta(OrdineCliente o, String tipo, String varietà, int quantità, Pianta pianta){
-
-            o.creaRigaDiOrdine(tipo, varietà, quantità, pianta);
-            TipoPianta tp = null;
-            
-            for(TipoPianta object: catalogo.getListaTipoPiante()){
-                if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
-                    tp = object;
-                }
-            }
-            if(tp != null){
-                tp.setQuantitàPianta(pianta.getEtàPianta(), quantità);
-            }
-    }
-    
-    public static void setPagamento(String tipoPagamento, OrdineCliente ordine){
-        
-        ordine.insertPagamento(tipoPagamento);
-    }
-    
-    public static void setSpedizione(String tipoSpedizione,OrdineCliente ordine){
-        ordine.insertSpedizone(tipoSpedizione);
-    }
-    
-    public static Pianta selezionaPianta(String tipo, String varietà, int età, int quantità){
-        
-        TipoPianta tipoPianta = null;
-        
-        //Seleziona il tipo di pianta dalla listaTipoPiante in base al tipo ed alla varietà
-        for(TipoPianta object: catalogo.getListaTipoPiante()){
-            if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
-                tipoPianta = object;
-//                Pianta pianta = tipoPianta.getPianta(età);
-                  for(Pianta object1: tipoPianta.getListaPiante()){
-                      if(object1.getEtàPianta() == età){
-                          
-                          return object1;
-                      }
-                   }
-                
-                //return pianta;
-            }
-            
-        }
-        if(tipoPianta == null){
-            System.err.println("Tipo Pianta non trovato");
-            
-        }
-        return null;
-    }
-    
-    /****************+PRENOTAZIONE*****************/
-    public static Prenotazione creaPrenotazione(Cliente c){
-        Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setCliente(c);
-        return prenotazione;
-    }
-    
-    
-    public static void effettuaPrenotazione(String tipo, String varietà,int quantità, Pianta p, Prenotazione prenotazione){
-        
-        p.addObserver(archivio);
-        //Osservatore o = new Osservatore(p);
-        
-        //p.addObserver(o);
-        
-        prenotazione.creaRigaDiOrdine(tipo, varietà, quantità, p);
-        
-        
-    }
-    
-    public static void confermaPrenotazione(Prenotazione p){
-        
-        Archivio.listaDiPrenotazioni.add(p);
-    }
-    
-    /*********ORDINE ALL'INGROSSO************/
-    public static OrdineIngrosso creaOrdineIngrosso(){
-        OrdineIngrosso ordine = new OrdineIngrosso();
-        return ordine;
-        
-    }
-    
-    public static void aggiungiPiantaOrdineIngrosso(OrdineIngrosso o, String tipo, String varieta, int eta, int quantita){
-        //System.out.println(eta+""+quantita);
-        o.creaRigaDiOrdine(tipo, varieta, quantita, eta);
-        
-    }
-    
-    public static void confermaOrdineIngrosso(OrdineIngrosso o,String emailFornitore){
-        
-        IdeaVerde.getArchivio().getListaDiOrdiniIngrosso().add(o);
-        o.inviaEmailFornitore(o, emailFornitore);
-        o.stampaOrdineIngrosso(o,emailFornitore);
-        
-    
-    }
-    
     /******************Liste*******************/
     
     public static List<Cliente> getListaClienti() {
         return listaClienti;
     }
 
-   
     public static Archivio getArchivio(){
         Archivio archivio = new Archivio();
         return archivio;
     }
 
     public static List<Prenotazione> getListaDiPrenotazioni() {
-        return Archivio.listaDiPrenotazioni;
+        return archivio.getListaDiPrenotazioni();
     }
 
     public static Catalogo getCatalogo() {

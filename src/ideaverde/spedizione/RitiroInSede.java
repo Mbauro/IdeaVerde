@@ -17,9 +17,6 @@ public class RitiroInSede extends Spedizione {
         return prezzo;
     }
     
-    
-    
-    
     public void setPrezzo(int prezzo){
         this.prezzo = prezzo;
     }

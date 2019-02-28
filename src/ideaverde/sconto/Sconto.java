@@ -14,7 +14,6 @@ public abstract class Sconto {
     
     public abstract void setPercentualeSconto(int newsconto);
 
-  
     public abstract int getPercentualeSconto();
     
     

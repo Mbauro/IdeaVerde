@@ -269,7 +269,7 @@ public class UI {
                 IdeaVerde.confermaOrdine(ordine, c, archivio);
                    
                                 
-                for(OrdineCliente object: archivio.getArchivioOrdini()){
+                for(Ordine object: archivio.getListaOrdini()){
                     System.out.println(object.toString());
                 }
                 for(OrdineCliente object: c.getListaDiOrdini()){
@@ -290,7 +290,9 @@ public class UI {
             case 6:{
 
                 System.out.println("Crea ordine all'ingrosso");
+                
                 OrdineIngrosso ordine = IdeaVerde.creaOrdineIngrosso();
+                
                 
                 String check = "s";
                 
@@ -335,10 +337,10 @@ public class UI {
                         email= myScanner.nextLine();
                     }
                 }while(controllo==0);         
-                         
+                
                 IdeaVerde.confermaOrdineIngrosso(ordine,email);
                     
-                    for(OrdineIngrosso object: IdeaVerde.getArchivio().getListaDiOrdiniIngrosso()){
+                    for(Ordine object: IdeaVerde.getArchivio().getListaOrdini()){
                         
                         for (RigaDiOrdine object2: object.getListaRigheDiOrdine()){
                             System.out.println("Prova ordine ingrosso "+object2.getQuantita()+"Eta': "+object2.getEta());

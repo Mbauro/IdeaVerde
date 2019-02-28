@@ -18,11 +18,14 @@ import java.util.ArrayList;
  */
 public class OrdineCliente extends Ordine {
     
-    
+    //CLIENTE
     private Cliente cliente;
+    //PAGAMENTO
     private Pagamento pagamento;
+    //SPEDIZIONE
     private Spedizione spedizione;
     private float totale = 0;
+    //PURESCONTO
     private PureSconto sconto;
     
 
@@ -43,10 +46,6 @@ public class OrdineCliente extends Ordine {
         
         
                 
-    }
-    
-    public void creaPagamento(String tipoPagamento){
-        
     }
     
     public float getTotale(){
@@ -97,9 +96,6 @@ public class OrdineCliente extends Ordine {
     }
 
     
-    
-    
-    
     public List<RigaDiOrdine> getListaRigheDiOrdine() {
         return listaRigheDiOrdine;
     }
@@ -112,10 +108,6 @@ public class OrdineCliente extends Ordine {
         this.listaRigheDiOrdine = listaRigheDiOrdine;
     }
 
-    public void setConsegna(String spedizione) {
-        //this.spedizione.setTipoSpedizione(spedizione);
-    }
-
     public void setTotale(float totale) {
         this.totale = totale;
     }
@@ -124,27 +116,8 @@ public class OrdineCliente extends Ordine {
       this.cliente = c;
    }
 
-    public Cliente getC() {
+    public Cliente getCliente() {
         return cliente;
-    }
-
-
-    
-
-    @Override
-    public String toString() {
-        return "[Ordine]" + " listaRigheDiOrdine = " + listaRigheDiOrdine + ", cliente = " + cliente + ", totale = " + totale + ", pagamento = " + this.pagamento.getTipoPagamento() + ", spedizione = " + this.spedizione.toString();
-    }
-    
-    
-    /*********************************/
-    
-    
-   
-    public Cliente getCliente(){
-       
-        return cliente;
-            
     }
 
     public Spedizione getSpedizione() {
@@ -166,7 +139,7 @@ public class OrdineCliente extends Ordine {
                 numero_piante += object.getQuantita();
             }
             //System.out.println("Numero piante: "+numero_piante);
-            String indirizzo = this.getC().getIndirizzo();
+            String indirizzo = this.getCliente().getIndirizzo();
             SpedizioneCorriere spedizione = new SpedizioneCorriere();
             spedizione.setIndirizzo_di_consegna(indirizzo);
             if(numero_piante < 50 && numero_piante > 0){
@@ -180,6 +153,10 @@ public class OrdineCliente extends Ordine {
         }
     }
     
+     @Override
+    public String toString() {
+        return "[Ordine]" + " listaRigheDiOrdine = " + listaRigheDiOrdine + ", cliente = " + cliente + ", totale = " + totale + ", pagamento = " + this.pagamento.getTipoPagamento() + ", spedizione = " + this.spedizione.toString();
+    }
     
     
     

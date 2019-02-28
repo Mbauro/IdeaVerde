@@ -17,6 +17,7 @@ public class Tessera {
     public Tessera(String nomeCliente, String cognomeCliente,int punti, String emailCliente) {
         
         this.punti = punti;
+        //DATI CLIENTE PROPRIETARIO DELLA TESSERA
         this.nomeCliente = nomeCliente;
         this.cognomeCliente = cognomeCliente;
         this.emailCliente= emailCliente;
@@ -48,11 +49,5 @@ public class Tessera {
     public int getPunti() {
         return punti;
     }
-    
-    
-    
-    
-    
-    
     
 }

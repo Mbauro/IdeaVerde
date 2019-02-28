@@ -1,0 +1,6 @@
+[Riga di ordine] quantità = 1000, età = 2, tipo = limone, varietà = varieta
+
+[Riga di ordine] quantità = 3000, età = 4, tipo = limone, varietà = varieta
+
+[Riga di ordine] quantità = 2000, età = 6, tipo = arancia, varietà = varieta
+

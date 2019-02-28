@@ -1,0 +1,2 @@
+quantità = 1000, tipo = limone, varieta = varieta
+

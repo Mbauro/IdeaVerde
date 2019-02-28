@@ -15,20 +15,22 @@ import javax.activation.*;
 
 public class OrdineIngrosso extends Ordine {
 
+    //FORNITORE
+    private String emailFornitore;
+    
     public OrdineIngrosso() {
         
         this.listaRigheDiOrdine = new ArrayList();
         
     }
     
-     public void creaRigaDiOrdine(String tipo, String varieta, int quantita, int eta){
-         System.out.println(eta+""+quantita);
+    public void creaRigaDiOrdine(String tipo, String varieta, int quantita, int eta){
+         
          RigaDiOrdine r = new RigaDiOrdine(tipo,varieta,quantita,eta);
-         System.out.println(r);
          this.listaRigheDiOrdine.add(r);
      }
      
-     public void inviaEmailFornitore(OrdineIngrosso o, String emailFornitore){
+    public void inviaEmailFornitore(String emailFornitore){
          
           // Recipient's email ID needs to be mentioned.
       String to = emailFornitore;
@@ -70,7 +72,10 @@ public class OrdineIngrosso extends Ordine {
          message.setSubject("Ordine ingrosso del "+timeStamp);
 
          // Now set the actual message
-         message.setText(o.getListaRigheDiOrdine().toString());
+         for (RigaDiOrdine object: this.getListaRigheDiOrdine()){
+            message.setText(object.toStringIngrosso());
+         }
+         
          
          Transport.send(message);
          System.out.println("Ordine inviato correttamente tramite email");
@@ -81,7 +86,7 @@ public class OrdineIngrosso extends Ordine {
          
      }
      
-     public void stampaOrdineIngrosso(OrdineIngrosso o, String email){
+    public void stampaOrdineIngrosso(String email){
                
         
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(Calendar.getInstance().getTime());
@@ -94,7 +99,7 @@ public class OrdineIngrosso extends Ordine {
                                 
             }else if(f.createNewFile()){
                 PrintWriter myprint = new PrintWriter(f);
-                for(RigaDiOrdine object: o.getListaRigheDiOrdine()){
+                for(RigaDiOrdine object: this.getListaRigheDiOrdine()){
                     myprint.println(object.toStringIngrosso());
                 }
                 
@@ -112,9 +117,12 @@ public class OrdineIngrosso extends Ordine {
     public List<RigaDiOrdine> getListaRigheDiOrdine() {
         return listaRigheDiOrdine;
     }
-    
-    
-    
+
+    public void setEmailFornitore(String emailFornitore) {
+        this.emailFornitore = emailFornitore;
+    }
     
     
 }
+
+

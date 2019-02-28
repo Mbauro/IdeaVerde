@@ -18,6 +18,7 @@ import java.util.Observer;
 public class Pianta extends Observable {
     
     List<Observer> osservatori = new ArrayList();
+    
     private int etaPianta;
     private int quantitàDisponibile;
 
@@ -51,12 +52,5 @@ public class Pianta extends Observable {
     public String toString() {
         return "[Pianta]" + " Et\u00e0Pianta = " + etaPianta + ", quantit\u00e0 disponibile in vivaio = " + quantitàDisponibile;
     }
-    
-
-   
-
-
-    
-    
     
 }

@@ -13,7 +13,9 @@ public class RigaDiOrdine {
  
     private float subTotale;
     private String tipo;
+    //ISTANZA DI PIANTA CONTENUTA NELLA RIGA
     private Pianta pianta;
+    
     private int eta;
     private int quantita;
     private String varieta;
@@ -101,11 +103,11 @@ public class RigaDiOrdine {
 
     @Override
     public String toString() {
-        return "[Riga di ordine]"+" quantit\u00e0 = " + quantita + ", subTotale = " + this.subTotale + ", tipo = " + tipo + ", varietà = "+varieta+"\n";
+        return "[Riga di ordine]"+" quantit\u00e0 = " + quantita +", età = "+eta+", subTotale = " + this.subTotale + ", tipo = " + tipo + ", varietà = "+varieta+"\n";
     }
 
     public String toStringIngrosso() {
-        return ""+"quantit\u00e0 = " + quantita +  ", tipo = " + tipo + ", varieta = "+varieta+"\n";
+            return "[Riga di ordine]"+" quantit\u00e0 = " + quantita +", età = "+eta+", tipo = " + tipo + ", varietà = "+varieta+"\n";
     }
            
     

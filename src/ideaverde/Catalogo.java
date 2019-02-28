@@ -14,7 +14,9 @@ import java.util.List;
  */
 public class Catalogo {
     
+    // LISTA DEI TIPI DI PIANTA
     List<TipoPianta> listaTipoPiante;
+    
     
     public Catalogo(){
         listaTipoPiante = new ArrayList<TipoPianta>();
