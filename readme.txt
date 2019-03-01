@@ -1,0 +1,1 @@
+Le librerie utilizzate per l'invio della mail per quanto riguarda l'ordine presso il fornitore si trovano nella cartella lib.
