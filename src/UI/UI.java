@@ -19,10 +19,12 @@ import ideaverde.sconto.ScontoSilver;
 public class UI {
     
         public static void main(String[] args){
+            
+        //ISTANZE UTILIZZATE PER SIMULARE IL SOFTWARE
         Fornitore f1 = new Fornitore("green garden","info@green.it","094183654");
         Fornitore f2 = new Fornitore("red garden","info@red.it","094183657");
         Fornitore f3 = new Fornitore("blue garden","info@blue.it","094183664");
-        Fornitore f4 = new Fornitore("yellow garden","redfish32@hotmail.it","094143654");
+        //Fornitore f4 = new Fornitore("yellow garden","redfish32@hotmail.it","094143654");
         
         TipoPianta tp1 = new TipoPianta("Limone","giallo","varieta");
         TipoPianta tp2 = new TipoPianta("Arancia","arancione","varieta");
@@ -37,7 +39,7 @@ public class UI {
         IdeaVerde.getListaFornitori().add(f1);
         IdeaVerde.getListaFornitori().add(f2);
         IdeaVerde.getListaFornitori().add(f3);
-        IdeaVerde.getListaFornitori().add(f4);
+        //IdeaVerde.getListaFornitori().add(f4);
         
         
         
@@ -66,7 +68,10 @@ public class UI {
                          + "8.Aggiorna quantita disponibile di una pianta\n"
                          + "9.Modifica scontistica (Questa operazione può essere fatta soltanto dal gestore)\n"
                          + "10.Inserisci nuova pianta di un tipo già presente in vivaio\n"
-                         + "11.Stampa Lista Clienti\n"
+                         + "11.Cancella prenotazione\n"
+                         + "12.Stampa Lista Clienti\n"
+                         + "13.Stampa Lista Prenotazioni\n"
+                         + "14.Inserisci un nuovo fornitore\n"
                          + "0.Esci Dal software");
         
         scelta = myScanner.nextInt();
@@ -223,12 +228,9 @@ public class UI {
                 if(ordine.getListaRigheDiOrdine().isEmpty()){
                     break;
                 }
-                   //Stampa righe di ordine
-                for(RigaDiOrdine object: ordine.getListaRigheDiOrdine()){
-                    object.calcolaSubTotale();
-                    System.out.println(object.toString());
-                }
-                   //Stampa il totale non scontato dell'ordine
+                //Stampa righe di ordine
+                ordine.stampaRiepilogoOrdine();
+                //Stampa il totale non scontato dell'ordine
                 System.out.println("Seleziona il tipo di pagamento\n1.Contanti\n2.Carta di credito\n");
                 scelta = myScanner.nextInt();
                 switch(scelta){
@@ -241,11 +243,7 @@ public class UI {
                         break;
                     }
                 }
-                   
-                //System.out.println(ordine.getPagamento().toString());
-                   
                 
-                //  System.out.println("Totale Ordine non scontato: "+totale+" €");
                    
 
                    
@@ -266,20 +264,9 @@ public class UI {
                 
                 
                    
-                IdeaVerde.confermaOrdine(ordine, c, archivio);
+                IdeaVerde.confermaOrdine(ordine, c);
                    
-                                
-                for(Ordine object: archivio.getListaOrdini()){
-                    System.out.println(object.toString());
-                }
-                for(OrdineCliente object: c.getListaDiOrdini()){
-                    System.out.println(object.toString());
-                }
-
-                 //Lista di prenotazioni
-                for(Prenotazione object: IdeaVerde.getListaDiPrenotazioni()){
-                     System.out.println(object.toString());
-                }
+                              
             }
 
 
@@ -292,7 +279,6 @@ public class UI {
                 System.out.println("Crea ordine all'ingrosso");
                 
                 OrdineIngrosso ordine = IdeaVerde.creaOrdineIngrosso();
-                
                 
                 String check = "s";
                 
@@ -312,7 +298,6 @@ public class UI {
 
                     System.out.println("Inserisci la quantità di piante da ordinare");
                     int quantita = myScanner.nextInt();
-                    //Pianta p = IdeaVerde.selezionaPianta(tipo,varietà,età,quantità);
                     IdeaVerde.aggiungiPiantaOrdineIngrosso(ordine, tipo, varieta, eta, quantita);
                     myScanner.nextLine();
                     System.out.println("Vuoi continuare? s/n");
@@ -320,33 +305,19 @@ public class UI {
                         
                 }while(check.equalsIgnoreCase("s"));
                 
-                for(Fornitore object: IdeaVerde.getListaFornitori()){
-                    object.mio_toString();
-                }
+                IdeaVerde.stampaListaFornitori();
+                
                 System.out.println("Inserisci l'email del fornitore presso il quale vuoi effettuare l'ordine: ");
                 String email= myScanner.nextLine();
                 int controllo=0;
                 do{
-                    for(Fornitore object: IdeaVerde.getListaFornitori()){
-                        if(email.equalsIgnoreCase(object.getEmailFornitore())){
-                            controllo=1;
-                        }
-                    }
-                    if(controllo==0){
-                        System.out.println("EMAILNONCORRETTA!!!Inserisci l'email del fornitore presso il quale vuoi effettuare l'ordine: ");
-                        email= myScanner.nextLine();
-                    }
+                    controllo=IdeaVerde.checkEmailFornitore(email);
+                    
                 }while(controllo==0);         
                 
                 IdeaVerde.confermaOrdineIngrosso(ordine,email);
                     
-                    for(Ordine object: IdeaVerde.getArchivio().getListaOrdini()){
-                        
-                        for (RigaDiOrdine object2: object.getListaRigheDiOrdine()){
-                            System.out.println("Prova ordine ingrosso "+object2.getQuantita()+"Eta': "+object2.getEta());
-                        }
-                    }
-                    break;
+                break;
                     
             
             }
@@ -392,9 +363,8 @@ public class UI {
                     try{
 
                         Pianta p= IdeaVerde.selezionaPianta(tipo, varieta, eta, quantita);
-                        p.setQuantitàDisponibile(p.getQuantitàDisponibile()+quantita);
-
-
+                        IdeaVerde.setQuantitaDisponibile(tipo, varieta, p, quantita);
+                        
                     }catch(NullPointerException e){
 
                         System.err.println("Pianta non trovata. Riprova l'inserimento");
@@ -489,18 +459,43 @@ public class UI {
                     System.out.println("Inserisci l'età della pianta: ");
                     int eta=myScanner.nextInt();
                     if(IdeaVerde.checkEtaPianta(eta, tipo)){
-                        System.out.println("Pianta già presente");
+                        System.err.println("Pianta già presente");
                     }else{
                         System.out.println("Inserisci la quantita': ");
                         int quantita=myScanner.nextInt();
                         IdeaVerde.inserisciPianta(tipo,varieta,eta,quantita);
                     }
+                }else{
+                    System.err.println("TIPO O VARIETA' NON CORRETTI");
                 }
                 break;
                 
             }
             
             case 11:{
+                IdeaVerde.stampaPrenotazioni();
+                if(IdeaVerde.getArchivio().getListaDiPrenotazioni().isEmpty()){
+                    System.err.println("ATTUALMENTE NON SONO PRESENTI PRENOTAZIONI");
+                }else{
+                    IdeaVerde.stampaPrenotazioni();
+                    
+                    System.out.println("Inserire le generalità del cliente del quale si vuole eliminare la prenotazione");
+
+                    System.out.println("Inserisci il cognome del cliente: ");
+                    String cognome=myScanner.nextLine();
+
+                    System.out.println("Inserisci il nome del cliente: ");
+                    String nome=myScanner.nextLine();
+
+                    System.out.println("Inserisci l'email del cliente: ");
+                    String email=myScanner.nextLine();
+                    
+                    IdeaVerde.eliminaPrenotazione(cognome,nome,email);
+                }
+                break;
+            }
+            
+            case 12:{
                 System.out.println("*********LISTA CLIENTI***********\n");
                 if(IdeaVerde.getListaClienti().isEmpty()){
                     System.out.println("Lista Vuota\n");
@@ -511,6 +506,28 @@ public class UI {
                     }
                 }
                 break;
+            }
+            
+            case 13:{
+                
+                IdeaVerde.stampaPrenotazioni();
+                break;
+            }
+            
+            case 14:{
+                
+                System.out.println("INSERIMENTO FORNITORE");
+                
+                System.out.println("Inserisci nome fornitore");
+                String nome=myScanner.nextLine();
+                
+                System.out.println("Inserisci email fornitore");
+                String email=myScanner.nextLine();
+                
+                System.out.println("Inserisci telefono fornitore");
+                String telefono=myScanner.nextLine();
+                
+                IdeaVerde.inserisciFornitore(nome,email,telefono);
             }
         }
         

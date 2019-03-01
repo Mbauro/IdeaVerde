@@ -7,18 +7,35 @@ package ideaverde;
 import ideaverde.sconto.*;
 import ideaverde.pagamento.*;
 import java.io.IOException;
+import java.util.*;
 
 
-public class PureSconto {
+public class CalcolaSconto {
     //SCONTO
     private Sconto sconto;
     
     
     
-    public Sconto selectScontoTessera(OrdineCliente o){
+    
+    public List<Sconto> calcolaSconti(OrdineCliente o){
+        List<Sconto>sconti=new ArrayList();
+        Sconto s1,s2;
+        
+        s1=selectScontoTessera(o);
+        s2=selectScontoPagamento(o);
+        sconti.add(s1);
+        sconti.add(s2);
+        if(sconti!=null){
+            return sconti;
+        }else{
+            return null;
+        }
+    }
+    
+    private Sconto selectScontoTessera(OrdineCliente o){
         
         int punti = o.getCliente().getTessera().getPunti();
-        if(punti >1000 && punti < 2000){
+        if(punti >1000 && punti <= 2000){
                 this.sconto=new ScontoSilver();
                 return this.sconto;
             
@@ -27,14 +44,12 @@ public class PureSconto {
         else if(punti > 2000){
             this.sconto=new ScontoGold();
             return this.sconto;
-
-
         }
         return null;
         
     }
     
-    public Sconto selectScontoPagamento(OrdineCliente o){
+    private Sconto selectScontoPagamento(OrdineCliente o){
     
         Pagamento p = o.getPagamento();
         

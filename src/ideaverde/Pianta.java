@@ -35,6 +35,10 @@ public class Pianta extends Observable {
     public int getQuantitàDisponibile() {
         return quantitàDisponibile;
     }
+    
+    public void setQuantitaUpdate(int quantita){
+        this.quantitàDisponibile=quantita;
+    }
 
      
     public void setEtàPianta(int etàPianta) {
@@ -45,7 +49,7 @@ public class Pianta extends Observable {
     public void setQuantitàDisponibile(int quantitaDisponibile) {
         this.quantitàDisponibile = quantitaDisponibile;
         setChanged();
-        notifyObservers(quantitaDisponibile);
+        notifyObservers();
     }
 
     @Override

@@ -13,23 +13,18 @@ import java.util.Observer;
 public class Archivio implements Observer {
     
     //LISTA DELLE PRENOTAZIONI
-    private List<Prenotazione> listaDiPrenotazioni = new ArrayList();
+    private List<Prenotazione> listaDiPrenotazioni;
     //LISTA DEGLI ORDINI
     private List<Ordine> listaOrdini;
     
+
+    
     public Archivio() {
-        //this.archivioOrdini = new ArrayList();
-        //this.listaDiOrdiniIngrosso = new ArrayList();
+        
+        this.listaDiPrenotazioni=new ArrayList();
         this.listaOrdini=new ArrayList();
     }
 
-    /*public List<OrdineCliente> getArchivioOrdini() {
-        return archivioOrdini;
-    }*/
-
-    /*public List<OrdineIngrosso> getListaDiOrdiniIngrosso() {
-        return listaDiOrdiniIngrosso;
-    }*/
 
     public List<Ordine> getListaOrdini() {
         return listaOrdini;
@@ -39,54 +34,85 @@ public class Archivio implements Observer {
         return listaDiPrenotazioni;
     }
     
+    public OrdineCliente creaNuovoOrdine(Cliente c){
+        OrdineCliente ordine=new OrdineCliente();
+        ordine.setC(c);
+        return ordine;
+    }
     
-    
+    public Prenotazione creaPrenotazione(Cliente c){
+        Prenotazione prenotazione= new Prenotazione();
+        prenotazione.setCliente(c);
+        return prenotazione;
+    }
 
+    public OrdineIngrosso creaOrdineIngrosso(){
+        OrdineIngrosso ordine = new OrdineIngrosso();
+        return ordine;
+    }
+    
     // Metodo UPDATE che verrà chiamato da notifyObservers che è presente in pianta.
     public void update(Observable pianta,Object o){
         
-        Pianta p=(Pianta)pianta;
-        int quantita=(int)o;
+        System.out.println("STO CONTROLLANDO LE PRENOTAZIONI...............");
         
+        Pianta p=(Pianta)pianta;
+                
         OrdineCliente ordine=null;
         
-        System.out.println("PrIMa");
-        
-        for (Prenotazione io: this.listaDiPrenotazioni){
-            System.out.println(io.getListaRigheDiPrenotazione().toString());
-        }
         
         
-        for (Prenotazione prenotazione: this.listaDiPrenotazioni){
+        
+        for (int j=0;j<this.listaDiPrenotazioni.size();j++){
             
-            System.out.println("Prenotazione di : "+prenotazione.getCliente().getCognome());
             
-            for(int i=0;i<prenotazione.getListaRigheDiPrenotazione().size();i++){
+            
+            for(int i=0;i<this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().size();i++){
                 //System.out.println(object.getListaRigheDiPrenotazione().get(i).toString());
                 
-                if(prenotazione.getListaRigheDiPrenotazione().get(i).getPianta()==p){
-                    
-                    if(p.getQuantitàDisponibile()>prenotazione.getListaRigheDiPrenotazione().get(i).getQuantita()){
+                if(this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).getPianta()==p){
+                   
+                    if(p.getQuantitàDisponibile()>this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).getQuantita()){
                         
                         if(ordine==null){
                             
-                            ordine=IdeaVerde.creaNuovoOrdine(prenotazione.getCliente());
+                            ordine=IdeaVerde.creaNuovoOrdine(this.listaDiPrenotazioni.get(j).getCliente());
                             //Set del subtotale della riga di prenotazione
-                            prenotazione.getListaRigheDiPrenotazione().get(i).calcolaSubTotale();
+                            System.out.println("Ho creato un oedine per "+this.listaDiPrenotazioni.get(j).getCliente().getCognome());
+                            this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).calcolaSubTotale();
                             //aggiungo la riga di ordine all'ordine dato che adesso può essere consegnata la quantità
-                            ordine.getListaRigheDiOrdine().add(prenotazione.getListaRigheDiPrenotazione().get(i));
+                            ordine.getListaRigheDiOrdine().add(this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i));
+                            System.out.println("Sto spedendo "+this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i)+"a "+this.listaDiPrenotazioni.get(j).getCliente().getCognome());
+                            this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).getPianta().setQuantitaUpdate(this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).getPianta().getQuantitàDisponibile()-this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).getQuantita());
                            
                             //rimuovo la riga di prenotazione poichè è stata consegnata
-                            prenotazione.getListaRigheDiPrenotazione().remove(i);
+                            this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().remove(i);
+                            
+                            //Cancello la prenotazione se non contiene righe di ordine
+                            if(this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().isEmpty()){
+                                this.listaDiPrenotazioni.remove(j);
+                                if(this.listaDiPrenotazioni.isEmpty()){
+                                    break;
+                                }
+                            }
                             
                         }else{
                             //set del subtotale della riga di prenotazione
-                            prenotazione.getListaRigheDiPrenotazione().get(i).calcolaSubTotale();
+                            this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).calcolaSubTotale();
                             ////aggiungo la riga di ordine all'ordine dato che adesso può essere consegnata la quantità
-                            ordine.getListaRigheDiOrdine().add(prenotazione.getListaRigheDiPrenotazione().get(i));
+                            ordine.getListaRigheDiOrdine().add(this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i));
+                            System.out.println("Sto spedendo "+this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i)+"a "+this.listaDiPrenotazioni.get(j).getCliente().getCognome());
+                            this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).getPianta().setQuantitaUpdate(this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).getPianta().getQuantitàDisponibile()-this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().get(i).getQuantita());
                            
                             //Rimuovo dalla lista la merce partita dal vivaio
-                            prenotazione.getListaRigheDiPrenotazione().remove(i);
+                            this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().remove(i);
+                            //Cancello la prenotazione se non contiene righe di ordine
+                            if(this.listaDiPrenotazioni.get(j).getListaRigheDiPrenotazione().isEmpty()){
+                                this.listaDiPrenotazioni.remove(j);
+                                if(this.listaDiPrenotazioni.isEmpty()){
+                                    break;
+                                }
+                            }
                             
                             
                         }
@@ -103,21 +129,40 @@ public class Archivio implements Observer {
         
         if(ordine!=null){
             
-            IdeaVerde.confermaOrdine(ordine,ordine.getCliente(),IdeaVerde.getArchivio());
+            IdeaVerde.confermaOrdine(ordine,ordine.getCliente());
         }
         
-        for (Prenotazione object: this.listaDiPrenotazioni){
-            System.out.println("Prenotazione di : "+object.getCliente().getCognome());
-            for(RigaDiOrdine object1: object.getListaRigheDiPrenotazione()){
-                System.out.println(object1.toString());
-            }
-    
-        }
-        System.out.println("DOPO");
-        for (Prenotazione prenotazione: this.listaDiPrenotazioni){
-            System.out.println(prenotazione.getListaRigheDiPrenotazione().toString());
-        }
+
+
         p.deleteObserver(this);
     }
     
+    public void eliminaPrenotazione(String nome,String cognome,String email){
+        int controllo=0;
+        for(int i=0;i<listaDiPrenotazioni.size();i++){
+            Prenotazione object=listaDiPrenotazioni.get(i);
+            if(object.getCliente().getNome().equalsIgnoreCase(nome)&&object.getCliente().getCognome().equalsIgnoreCase(cognome)&&object.getCliente().getEmail().equalsIgnoreCase(email)){
+                controllo=1;
+            }
+            if (controllo==1){
+                listaDiPrenotazioni.remove(i);
+                break;
+            }
+        }
+        if (controllo==0){
+            System.err.println("NON CORRISPONDE NESSUNA PRENOTAZIONE A QUESTO CLIENTE");
+        }
+        
     }
+    
+    public void stampaPrenotazioni(){
+        if(listaDiPrenotazioni.isEmpty()){
+            System.err.println("LISTA DI PRENOTAZIONI VUOTA");
+        }else{
+            for(Prenotazione object:this.listaDiPrenotazioni){
+                System.out.println(object.toString());
+            }
+        }
+    }
+    
+}

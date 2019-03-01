@@ -10,7 +10,7 @@ public class PagamentoCartaDiCredito extends Pagamento {
 
     public PagamentoCartaDiCredito() {
         super();
-        this.tipoPagamento = "Pagamento con carta di credito";
+        this.tipoPagamento = "CartaDiCredito";
     }
     
     public Pagamento getPagamento(){

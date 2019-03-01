@@ -6,6 +6,7 @@
 package ideaverde;
 import ideaverde.spedizione.Spedizione;
 import ideaverde.pagamento.*;
+
 import ideaverde.sconto.*;
 import ideaverde.spedizione.RitiroInSede;
 import ideaverde.spedizione.SpedizioneCorriere;
@@ -26,7 +27,9 @@ public class OrdineCliente extends Ordine {
     private Spedizione spedizione;
     private float totale = 0;
     //PURESCONTO
-    private PureSconto sconto;
+    private CalcolaSconto sconto;
+    
+    
     
 
 
@@ -42,10 +45,17 @@ public class OrdineCliente extends Ordine {
     public void creaRigaDiOrdine(String tipo, String varietà, int quantità, Pianta p){
         
         RigaDiOrdine r = new RigaDiOrdine(tipo,varietà,quantità,p);
+        r.calcolaSubTotale();
         this.listaRigheDiOrdine.add(r);
         
         
                 
+    }
+    
+    public void stampaRiepilogoOrdine(){
+        for(RigaDiOrdine object:this.listaRigheDiOrdine){
+            System.out.println(object.toString());
+        }
     }
     
     public float getTotale(){
@@ -76,14 +86,22 @@ public class OrdineCliente extends Ordine {
     public float getTotaleScontato(){
         
         
-        this.sconto=new PureSconto();
-        Sconto st,sp;
-        st=this.sconto.selectScontoTessera(this);
-        sp=this.sconto.selectScontoPagamento(this);
-        float totale_scontato = 0;
-          
+        this.sconto=new CalcolaSconto();
         
-        if(st==null){
+        List<Sconto>sconti;
+        sconti=this.sconto.calcolaSconti(this);
+        float totale_scontato = 0;
+        
+        for (Sconto object: sconti){
+            if(object==null){
+                totale_scontato=this.totale;
+            }else{
+                this.totale=this.totale-(this.totale*object.getPercentualeSconto()/100);
+            }
+        }
+        totale_scontato=this.totale;
+        
+        /*if(st==null){
             totale_scontato=this.totale;
         }else{
             totale_scontato= this.totale-(this.totale*st.getPercentualeSconto()/100);
@@ -92,6 +110,7 @@ public class OrdineCliente extends Ordine {
         
            
         this.setTotale(totale_scontato);
+        */
         return totale_scontato;
     }
 
@@ -135,6 +154,7 @@ public class OrdineCliente extends Ordine {
             //Dopo 50 piante rimane 50€
             int i = 0;
             int numero_piante = 0;
+            
             for(RigaDiOrdine object: this.getListaRigheDiOrdine()){
                 numero_piante += object.getQuantita();
             }
@@ -142,7 +162,7 @@ public class OrdineCliente extends Ordine {
             String indirizzo = this.getCliente().getIndirizzo();
             SpedizioneCorriere spedizione = new SpedizioneCorriere();
             spedizione.setIndirizzo_di_consegna(indirizzo);
-            if(numero_piante < 50 && numero_piante > 0){
+            if(numero_piante <= 50 && numero_piante > 0){
                 spedizione.setPrezzo(numero_piante);
                 this.spedizione=spedizione;
             }

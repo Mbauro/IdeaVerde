@@ -162,9 +162,9 @@ public class IdeaVerde{
     /******************Gestione Ordini**********************/
     
     public static OrdineCliente creaNuovoOrdine(Cliente c){
-        OrdineCliente o = new OrdineCliente();
-        o.setC(c);
-        return o;
+        //OrdineCliente o = new OrdineCliente();
+        //o.setC(c);
+        return archivio.creaNuovoOrdine(c);
         
     }
     
@@ -198,23 +198,38 @@ public class IdeaVerde{
     
     
     public static void aggiungiPianta(OrdineCliente o, String tipo, String varietà, int quantità, Pianta pianta){
-
+            
+            int qua=-quantità;
+            
             o.creaRigaDiOrdine(tipo, varietà, quantità, pianta);
             TipoPianta tp = null;
-            
+
             for(TipoPianta object: catalogo.getListaTipoPiante()){
                 if(object.getTipo().equalsIgnoreCase(tipo) && object.getVarietà().equalsIgnoreCase(varietà)){
                     tp = object;
                 }
             }
             if(tp != null){
-                tp.setQuantitàPianta(pianta.getEtàPianta(), quantità);
+                tp.setQuantitaPianta(pianta.getEtàPianta(), qua);
             }
     }
     
+    public static void stampaListaFornitori(){
+        for(Fornitore object: listaFornitori){
+            object.mio_toString();
+        }
+    }
     
     public static void setSpedizione(String tipoSpedizione,OrdineCliente ordine){
         ordine.insertSpedizone(tipoSpedizione);
+    }
+    
+    public static void setQuantitaDisponibile(String tipo,String varieta,Pianta p,int quantita){
+        if(quantita<0){
+            System.err.println("Quantità non valida");
+        }else{
+            catalogo.setQuantitaDisponibile(tipo,varieta,p,quantita);
+        }    
     }
     
     public static void setPagamento(String tipoPagamento, OrdineCliente ordine){
@@ -234,18 +249,19 @@ public class IdeaVerde{
         return totale_scontato;
     }
      
-    public static void confermaOrdine(OrdineCliente o, Cliente c, Archivio a){
+    public static void confermaOrdine(OrdineCliente o, Cliente c){
         
         c.getListaDiOrdini().add(o);
-        a.getListaOrdini().add(o);
+        archivio.getListaOrdini().add(o);
 
     }
      
     /**************** GESTIONE PRENOTAZIONE*****************/
     public static Prenotazione creaPrenotazione(Cliente c){
-        Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setCliente(c);
-        return prenotazione;
+        return archivio.creaPrenotazione(c);
+        //Prenotazione prenotazione = new Prenotazione();
+        //prenotazione.setCliente(c);
+        //return prenotazione;
     }
     
     public static void effettuaPrenotazione(String tipo, String varietà,int quantità, Pianta p, Prenotazione prenotazione){
@@ -267,8 +283,8 @@ public class IdeaVerde{
     
     /*********ORDINE ALL'INGROSSO************/
     public static OrdineIngrosso creaOrdineIngrosso(){
-        OrdineIngrosso ordine = new OrdineIngrosso();
-        return ordine;
+        
+        return archivio.creaOrdineIngrosso();
         
     }
     
@@ -278,15 +294,40 @@ public class IdeaVerde{
         
     }
     
+    public static int checkEmailFornitore(String email){
+        Scanner myScanner=new Scanner(System.in);
+        int controllo=0;
+        for(Fornitore object: IdeaVerde.getListaFornitori()){
+            if(email.equalsIgnoreCase(object.getEmailFornitore())){
+                controllo=1;
+            }
+        }
+        if(controllo==0){
+            System.out.println("EMAILNONCORRETTA!!!Inserisci l'email del fornitore presso il quale vuoi effettuare l'ordine: ");
+            email= myScanner.nextLine();
+        }
+        return controllo;
+    }
+    
     public static void confermaOrdineIngrosso(OrdineIngrosso o,String emailFornitore){
         
         IdeaVerde.getArchivio().getListaOrdini().add(o);
         o.setEmailFornitore(emailFornitore);
         o.inviaEmailFornitore(emailFornitore);
-        o.stampaOrdineIngrosso(emailFornitore);
+        
         
     
     }
+    
+    public static void eliminaPrenotazione(String nome,String cognome,String email){
+        archivio.eliminaPrenotazione(nome,cognome,email);
+        
+    }
+    
+    public static void stampaPrenotazioni(){
+        archivio.stampaPrenotazioni();
+    }
+    
     
     
     
@@ -417,6 +458,21 @@ public class IdeaVerde{
         catalogo.inserisciPianta(tipo, varieta, eta, quantita);
     }
     
+    public static void inserisciFornitore(String nome,String email,String telefono){
+        int controllo=0;
+        for(Fornitore object: listaFornitori){
+            if(object.getEmailFornitore().equalsIgnoreCase(email)){
+                controllo=1;
+            }
+        }
+        if(controllo==1){
+            System.err.println("Il fornitore è gia registrato!!!");
+        }else{
+            Fornitore f=new Fornitore(nome,email,telefono);
+            listaFornitori.add(f);
+        }
+    }
+    
     /******************Liste*******************/
     
     public static List<Cliente> getListaClienti() {
@@ -424,7 +480,6 @@ public class IdeaVerde{
     }
 
     public static Archivio getArchivio(){
-        Archivio archivio = new Archivio();
         return archivio;
     }
 

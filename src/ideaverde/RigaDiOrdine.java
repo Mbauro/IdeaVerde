@@ -27,6 +27,7 @@ public class RigaDiOrdine {
         this.quantita = quantita;
         this.tipo = tipo;
         this.pianta = p;
+        this.eta=p.getEtàPianta();
         this.varieta=varieta;
         //p.aggiornaQuantitàDisponibile(quantità);
         

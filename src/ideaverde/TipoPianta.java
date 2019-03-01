@@ -54,21 +54,19 @@ public class TipoPianta {
         return listaPiante;
     }
     
-    public void setQuantitàPianta(int età, int quantità){
+    public void setQuantitaPianta(int età, int quantita){
         
-       for(Pianta object: this.getListaPiante()){
-           if(object.getEtàPianta() == età){
-               
-               if(object.getQuantitàDisponibile() < quantità){
-                   System.err.println("Quantità NON DISPONIBILE");
-               }
-               else{
-                   object.setQuantitàDisponibile(object.getQuantitàDisponibile()-quantità);
+            for(Pianta object: this.getListaPiante()){
+                if(object.getEtàPianta() == età){
+
+                    
+                        object.setQuantitàDisponibile(object.getQuantitàDisponibile()+quantita);
+
                    
-               }
-           }
-               
-        }
+                }
+
+            }
+        
     }
-    
+
 }

@@ -10,7 +10,7 @@ public class PagamentoContante extends Pagamento {
 
     public PagamentoContante() {
         
-        this.tipoPagamento = "pagamento in contanti";
+        this.tipoPagamento = "Contanti";
     }
     
         public String getTipoPagamento(){

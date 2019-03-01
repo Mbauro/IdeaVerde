@@ -41,7 +41,7 @@ public class Prenotazione {
 
     @Override
     public String toString() {
-        return "Prenotazione{" + "cliente=" + cliente + " listaRigheDiPrenotazione=" + listaRigheDiPrenotazione + '}';
+        return "Prenotazione di: "+ cliente + " listaRigheDiPrenotazione=" + listaRigheDiPrenotazione;
     }
     
     
