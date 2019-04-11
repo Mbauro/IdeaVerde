@@ -36,7 +36,7 @@ public class OrdineIngrosso extends Ordine {
       String to = emailFornitore;
 
       // Sender's email ID needs to be mentioned
-      String from = "ideaverdect@gmail.com";
+      String from = "ideaverdect@email.com";
 
       // Assuming you are sending email from localhost
       String host = "localhost";
@@ -51,7 +51,7 @@ public class OrdineIngrosso extends Ordine {
     Session session = javax.mail.Session.getInstance( props, 
          new javax.mail.Authenticator() {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-               return new javax.mail.PasswordAuthentication("ideaverdect@gmail.com", "ideaverdeCT2019"); //username and password
+               return new javax.mail.PasswordAuthentication("ideaverdect@email.com", "passwd"); //username and password
        }
          });
       
